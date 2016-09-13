@@ -1,0 +1,4 @@
+<% @posts.each do |post| %>
+    <p><%= image_tag(post.attributes["src"].value) %></p>
+    <%= button_tag("Post to Facebook Page") %>
+<% end %>
