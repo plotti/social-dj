@@ -6,6 +6,8 @@ gem "nokogiri"
 gem 'jquery-infinite-pages'
 gem "kaminari"
 gem 'punkt-segmenter'
+gem 'omniauth'
+gem 'omniauth-facebook', '1.4.0'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
