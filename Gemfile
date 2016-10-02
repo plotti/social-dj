@@ -8,7 +8,9 @@ gem "kaminari"
 gem 'punkt-segmenter'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
-
+gem "koala"
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem "whenever"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

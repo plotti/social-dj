@@ -1,8 +1,11 @@
+<% if current_user %>
+    <%= link_to 'Logout', signout_path %>
+<% end %>
 <div id="feed" %>
     <div id="posts">
-        <%= render partial: "posts", results: @results %>
+        <%= render partial: "posts", posts: @posts %>
     </div>
     <p class="pagination">
-        <%= link_to_next_page(@results, 'Next Page', :remote => true) %>
+        <%= link_to_next_page(@posts, 'Next Page', :remote => true) %>
     </p>
 </div>

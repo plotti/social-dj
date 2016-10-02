@@ -9,19 +9,9 @@
   <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" %>
 </head>
 <body>
-  <div id="user-widget">
-    <% if current_user %>
-      Welcome <strong><%= current_user.name %></strong>!
-      <%= link_to "Sign out", signout_path, id: "sign_out" %>
-    <% else %>
-      <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-    <% end %>
-  </div>
     <div class="container">
-      <% flash.each do |name, msg| %>
-          <%= content_tag(:div, msg, class: "alert alert-info") %>
-      <% end %>
-      <%= yield %>
+        <div id="notice" class="alert alert-info navbar navbar-default navbar-fixed-top" style="display: none;"></div>
+        <%= yield %>
     </div>
 </body>
 </html>
