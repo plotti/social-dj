@@ -15,7 +15,7 @@ class PostsController < ApplicationController
         url = "https://maker.ifttt.com/trigger/post_to_facebook/with/key/dp2XUqkdrC8BxnED9mzsqE"
         @result = HTTParty.post(url, 
         :body => {  
-               :value1 => params["image"], 
+               :value1 => request.protocol + request.host_with_port + params["image"], 
                :value2 => params["title"] 
              }.to_json,
         :headers => { 'Content-Type' => 'application/json' } )

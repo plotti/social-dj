@@ -14,7 +14,7 @@ class Post
 
       def self.collect_new_posts
         accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").collect{|s| URI.parse(s).path.gsub("/","")}
-        accounts.each do |acount|
+        accounts.each do |account|
             Post.get_new_posts(account)
         end
       end
@@ -39,6 +39,7 @@ class Post
         url = item.css(".itemtitle")[0]["href"]
         post = Post.where(:url => url).first
         if post == nil
+            logger.info("Collecting #{url} for #{account}")
             p = Post.new
             p.image_url = item.css("a+ a img")[0]["src"] rescue []
             if p.image_url == [] || p.image_url == nil
