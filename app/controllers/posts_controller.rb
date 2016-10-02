@@ -13,7 +13,7 @@ class PostsController < ApplicationController
 
     def post_to_facebook
         url = "https://maker.ifttt.com/trigger/post_to_facebook/with/key/dp2XUqkdrC8BxnED9mzsqE"
-        image_url = request.protocol + request.host_with_port + params["image"]
+        image_url = request.protocol + request.host_with_port + params["image"].gsub("jpg/","jpg")
         logger.info("Posted #{image_url} with #{params["title"]}")
         @result = HTTParty.post(url, 
         :body => {  
