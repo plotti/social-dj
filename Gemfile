@@ -10,6 +10,7 @@ gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
 gem "koala"
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem "carrierwave-mimetype-fu"
 gem "whenever"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
