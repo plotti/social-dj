@@ -1,0 +1,17 @@
+<% @results.each do |result| %>
+    <div class="row">
+        <div class="col-sm-12 text-xs-center">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <%= "#{result[:title]}" %> 
+                    </h3>
+                </div>    
+                <div class="panel-body">
+                    <p><%= image_tag(result[:image]) %></p>
+                    <button type="button" class="btn btn-default">Post to Facebookpage</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% end %>

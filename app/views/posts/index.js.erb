@@ -1,0 +1,11 @@
+// Append new data
+$("<%=j render partial: 'posts', :results => @results %>")
+  .appendTo($("#posts"));
+
+// Update pagination link
+<% if @results.last_page? %>
+  $('.pagination').html("That's all, folks!");
+<% else %>
+  $('.pagination')
+    .html("<%=j link_to_next_page(@results, 'Next Page', :remote => true) %>");
+<% end %>

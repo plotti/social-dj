@@ -1,4 +1,6 @@
-<% @posts.each do |post| %>
-    <p><%= image_tag(post.attributes["src"].value) %></p>
-    <%= button_tag("Post to Facebook Page") %>
-<% end %>
+<div id="posts" %>
+    <%= render partial: "posts", results: @results %>
+    <p class="pagination">
+        <%= link_to_next_page(@results, 'Next Page', :remote => true) %>
+    </p>
+</div>
