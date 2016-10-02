@@ -44,7 +44,11 @@ class Post
             image_url = item.css("a+ a img")[0]["src"] rescue []
             if image_url != [] && image_url != nil
                 p.image_url = image_url
-                p.image = open(image_url)
+                begin
+                    p.image = open(image_url)
+                rescue
+                    logger.error("Something went wrong with #{image_url}")
+                end
             else
                 return nil
             end
