@@ -42,11 +42,11 @@ class Post
             logger.info("Collecting #{url} for #{account}")
             p = Post.new
             image_url = item.css("a+ a img")[0]["src"] rescue []
-            if image_url == [] || image_url == nil
-                return nil
-            else
+            if image_url != [] && image_url != nil
                 p.image_url = image_url
                 p.image = open(image_url)
+            else
+                return nil
             end
             title = item.css(".content").text.gsub(/.*·/,"")
             if title.length > 70 #more than 70 letters
