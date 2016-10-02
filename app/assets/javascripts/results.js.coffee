@@ -1,6 +1,6 @@
 $ ->
   # Configure infinite table
-  $('#posts').infinitePages
+  $('#feed').infinitePages
     # debug: true
     loading: ->
       $(this).text('Loading next page...')

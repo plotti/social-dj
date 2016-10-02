@@ -15,9 +15,17 @@ class Post
                 image = item.css("a+ a img")[0]["src"] rescue []
                 next if image == []
                 title = item.css(".content").text.gsub(/.*·/,"")
+                description = ""
+                if title.length > 70 #more than 70 letters
+                    tokenizer = Punkt::SentenceTokenizer.new(title)
+                    segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
+                    description = segments[1..99].join(" ")
+                    title = segments[0]
+                end
                 time = DateTime.parse(item.css("time").text)
                 url = item.css(".itemtitle")[0]["href"]
-                results << {:title => title, :image => image, :url => url, :time => time}
+                next if !url.include?(account) #usually repostes and other shit
+                results << {:title => title, :image => image, :url => url, :time => time, :description => description}
             end
             results
         end

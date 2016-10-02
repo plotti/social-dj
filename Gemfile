@@ -5,6 +5,8 @@ gem "mongoid"
 gem "nokogiri"
 gem 'jquery-infinite-pages'
 gem "kaminari"
+gem 'punkt-segmenter'
+
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
