@@ -41,27 +41,33 @@ class Post
         if post == nil
             logger.info("Collecting #{url} for #{account}")
             p = Post.new
-            p.image_url = item.css("a+ a img")[0]["src"] rescue []
-            if p.image_url == [] || p.image_url == nil
+            image_url = item.css("a+ a img")[0]["src"] rescue []
+            if image_url == [] || image_url == nil
                 return nil
             else
-                p.image = open(p.image_url)
+                p.image_url = image_url
+                p.image = open(image_url)
             end
-            p.title = item.css(".content").text.gsub(/.*·/,"")
-            p.description = ""
-            if p.title.length > 70 #more than 70 letters
-                tokenizer = Punkt::SentenceTokenizer.new(p.title)
-                segments = tokenizer.sentences_from_text(p.title, :output => :sentences_text)
-                description = segments[1..99].join(" ")
-                title = segments[0]
+            title = item.css(".content").text.gsub(/.*·/,"")
+            if title.length > 70 #more than 70 letters
+                tokenizer = Punkt::SentenceTokenizer.new(title)
+                segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
+                p.description = segments[1..99].join(" ")
+                p.title = segments[0]
+            else
+                p.title = title
+                p.description = ""
             end
             p.time = DateTime.parse(item.css("time").text)
-            p.url = item.css(".itemtitle")[0]["href"]
+            url = item.css(".itemtitle")[0]["href"]
             p.account = account
-            if !p.url.include?(account)
+            if !url.include?(account)
                 return nil #usually repostes and other shit
+            else
+                p.url = url
             end
             p.save!
+            logger.info("Saved")
         else
             p = post
         end
