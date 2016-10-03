@@ -8,7 +8,7 @@ class PostsController < ApplicationController
     end
 
     def index
-        if current_user.acounts == []
+        if current_user.accounts == []
             redirect_to url_for(:action => :set_up_accounts)
         else
             @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
