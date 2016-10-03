@@ -22,7 +22,7 @@ class PostsController < ApplicationController
             current_user.save
             redirect_to url_for(:action => :index)
         else
-            if current_user.accounts == nil
+            if current_user.accounts == []
                 @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
             else
                 @accounts = current_user.accounts.collect{|s| "https://www.facebook.com/#{s.account}"}
