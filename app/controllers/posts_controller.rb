@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
     def set_up_accounts
         if request.post?
-            accounts =  params["accounts"].split("\r").gsub("\n","").collect{|s| s.match(/www.facebook.com\/(.*)\//)[1]}
+            accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","").match(/www.facebook.com\/(.*)\//)[1]}
             current_user.accounts = accounts
             current_user.save
             redirect_to url_for(:action => :index)
