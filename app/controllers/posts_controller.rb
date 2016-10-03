@@ -8,7 +8,21 @@ class PostsController < ApplicationController
     end
 
     def index
-        @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
+        if current_user.acounts == []
+            redirect_to url_for(:action => :set_up_accounts)
+        else
+            @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
+        end
+    end
+
+    def set_up_accounts
+        if request.post?
+            accounts =  params["accounts"].split("\r")
+            current_user.accounts = accounts
+            current_user.save
+        else
+            @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
+        end
     end
 
     def post_to_facebook
