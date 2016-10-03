@@ -25,7 +25,7 @@ class PostsController < ApplicationController
             if current_user.accounts == nil
                 @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
             else
-                @accounts = current_user.collect{|s| "https://www.facebook.com/#{s.account}"}
+                @accounts = current_user.accounts.collect{|s| "https://www.facebook.com/#{s.account}"}
             end
         end
     end
