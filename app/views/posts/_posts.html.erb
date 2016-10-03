@@ -8,8 +8,8 @@
                             <%= "#{post.title}" %> 
                         </h3>
                     </div>    
-                    <input name="image" type="hidden" value=<%= post.image.url %>/>
-                    <input name="title" type="hidden" value=<%= post.title %>/>
+                    <input name="image" type="hidden" value='<%= post.image.url %>'/>
+                    <input name="title" type="hidden" value='<%= post.title %>'/>
                     <div class="panel-body">
                         <p><%= image_tag(post.image.url) %></p>
                         <p><%= post.description %></p>
