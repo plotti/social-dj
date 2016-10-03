@@ -20,6 +20,7 @@ class PostsController < ApplicationController
             accounts =  params["accounts"].split("\r")
             current_user.accounts = accounts
             current_user.save
+            redirect_to url_for(:action => :index)
         else
             @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
         end
