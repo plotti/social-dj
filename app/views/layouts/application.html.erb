@@ -9,6 +9,25 @@
   <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" %>
 </head>
 <body>
+    <% if current_user %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <ul class="nav navbar-nav">
+            <li>
+                <%= link_to 'Logout', signout_path %>
+            </li>
+            <li>
+                <%= link_to "Adjust my Accounts", set_up_accounts_path %>
+            </li>
+            <li>
+                <%= link_to "Adjust my IFFT Post hook", adjust_ifttt_hook_path %>
+            <li>
+        </ul>
+        </div>
+      </div>
+    </nav>
+    <% end %>
     <div class="container">
         <div id="notice" class="alert alert-info navbar navbar-default navbar-fixed-top" style="display: none;"></div>
         <%= yield %>

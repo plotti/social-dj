@@ -6,6 +6,7 @@ class User
   field :oauth_token, type: String
   field :oauth_expires_at, type: Time
   field :accounts, type: Array
+  field :ifttt_hook, type: String
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

@@ -8,6 +8,9 @@ class PostsController < ApplicationController
     end
 
     def index
+        if current_user == nil
+            redirect_to url_for(:action => :login)
+        end
         if current_user.accounts == []
             redirect_to url_for(:action => :set_up_accounts)
         else
@@ -17,7 +20,9 @@ class PostsController < ApplicationController
 
     def set_up_accounts
         if request.post?
-            accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","").match(/www.facebook.com\/(.*)\//)[1]}
+            accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","")}
+            puts accounts
+            accounts = accounts.collect{|s| s.match(/www.facebook.com\/(.*)/)[1].gsub("/","") }
             current_user.accounts = accounts
             current_user.save
             redirect_to url_for(:action => :index)
@@ -25,13 +30,27 @@ class PostsController < ApplicationController
             if current_user.accounts == []
                 @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
             else
-                @accounts = current_user.accounts.collect{|s| "https://www.facebook.com/#{s.account}"}
+                @accounts = current_user.accounts.collect{|s| "https://www.facebook.com/#{s}"}.join("\n")
             end
         end
     end
 
+    def adjust_ifttt_hook
+        if request.post?
+            current_user.ifttt_hook = params["ifttt_hook"]
+            current_user.save
+            redirect_to url_for(:action => :index)
+        else
+            if current_user.ifttt_hook == nil
+                @ifttt_hook = "https://maker.ifttt.com/trigger/post_to_facebook/with/key/YOUR_IFTTT_HOOK_KEY"
+            else
+                @ifttt_hook = current_user.ifttt_hook
+            end
+        end
+    end 
+
     def post_to_facebook
-        url = "https://maker.ifttt.com/trigger/post_to_facebook/with/key/dp2XUqkdrC8BxnED9mzsqE"
+        url = current_user.ifttt_hook
         image_url = request.protocol + request.host_with_port + params["image"].gsub("jpg/","jpg")
         logger.info("Posted #{image_url} with #{params["title"]}")
         @result = HTTParty.post(url, 

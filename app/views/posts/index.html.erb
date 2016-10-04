@@ -1,6 +1,3 @@
-<% if current_user %>
-    <%= link_to 'Logout', signout_path %>
-<% end %>
 <div id="feed" %>
     <div id="posts">
         <%= render partial: "posts", posts: @posts %>
