@@ -13,6 +13,8 @@ class PostsController < ApplicationController
         end
         if current_user.accounts == []
             redirect_to url_for(:action => :set_up_accounts)
+        elsif current_user.ifttt_hook == nil
+            redirect_to url_for(:action => :adjust_ifttt_hook)
         else
             @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
         end
