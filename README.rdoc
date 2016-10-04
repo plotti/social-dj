@@ -1,3 +1,4 @@
 == README
 
 This is Facebook DJ. It collects your favorite accounts from facebook and presents them in a clean way without ads. You can then browse them and with the click of a button publish them to your favorite facebook page. 
+ 
