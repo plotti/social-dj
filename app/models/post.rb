@@ -13,8 +13,9 @@ class Post
       validates_uniqueness_of :url
 
       def self.collect_new_posts
-        accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").collect{|s| URI.parse(s).path.gsub("/","")}
+        accounts = User.all.collect{|s| s.accounts}.flatten
         accounts.each do |account|
+            logger.info("Collecting new items for #{account}")
             Post.get_new_posts(account)
         end
       end
@@ -23,7 +24,7 @@ class Post
         url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
         result = HTTParty.get(url)
         if result.body.include?("Facebook captcha challenge")
-            return ["error",url]
+            logger.error("Error collecting new items for #{url}")
         end
         doc = Nokogiri::HTML(result.body)
         results = []
