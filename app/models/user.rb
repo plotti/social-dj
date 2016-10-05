@@ -20,17 +20,4 @@ class User
     end
   end
 
-  def self.unblock_accounts
-    accounts = User.all.collect{|s| s.accounts}.flatten.uniq
-    path = Rails.root
-    accounts.each do |account|
-        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
-        #logger.info "Trying to unblock #{url}"
-        command = "php -f #{path}/fb-captcha-solver.php '#{url}' attempts=10"
-        logger.info(command)
-        result = `#{command}`
-        logger.info(result)
-    end
-  end
-
 end

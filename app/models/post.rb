@@ -15,25 +15,41 @@ class Post
       def self.collect_new_posts
         accounts = User.all.collect{|s| s.accounts}.flatten
         accounts.each do |account|
-            logger.info("Collecting new items for #{account}")
-            Post.get_new_posts(account)
+            result = Post.get_new_posts(account)
+            logger.info("Collected #{result.count} new items for #{account}. #{Post.count}")
         end
       end
   
       def self.get_new_posts(account)
         url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
         result = HTTParty.get(url)
+        path = Rails.root
+        no_capcha_needed = true
         if result.body.include?("Facebook captcha challenge")
-            logger.error("Error collecting new items for #{url}")
+            no_capcha_needed = false
+            logger.error("Capcha: Error collecting new items for #{url}.")
+            logger.info("Trying to solve it.")
+            command = "php -f #{path}/fb-captcha-solver.php '#{url}' attempts=10"
+            logger.info(command)
+            result = `#{command}`
+            logger.info(result)
+            if result.include?("Successfully")
+                no_capcha_needed = true
+            end
         end
-        doc = Nokogiri::HTML(result.body)
-        results = []
-        doc.css(".feeditem").each do |item|
-            p = Post.create_post(item,account)
-            next if p == nil
-            results << p
+        if no_capcha_needed
+            result = HTTParty.get(url)
+            doc = Nokogiri::HTML(result.body)
+            results = []
+            doc.css(".feeditem").each do |item|
+                p = Post.create_post(item,account)
+                next if p == nil
+                results << p
+            end
+            return results
+        else
+            logger.info("Could not solve capcha.")
         end
-        return results
       end
 
       def self.create_post(item,account)
@@ -51,6 +67,7 @@ class Post
                     logger.error("Something went wrong with #{image_url}")
                 end
             else
+                logger.error("Wrong image #{image_url}")
                 return nil
             end
             title = item.css(".content").text.gsub(/.*·/,"")
@@ -67,13 +84,15 @@ class Post
             url = item.css(".itemtitle")[0]["href"]
             p.account = account
             if !url.include?(account)
+                logger.info("URL #{url} does not contain account #{account}.")
                 return nil #usually repostes and other shit
             else
                 p.url = url
             end
             p.save!
-            logger.info("Saved")
+            logger.info("Saved post with #{url}")
         else
+            logger.info("Post with #{url} already exists.")
             p = post
         end
         return p

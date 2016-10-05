@@ -11,9 +11,6 @@ every 2.hours do
   runner "Post.collect_new_posts"
 end
 
-every 1.hours do
-    runner "User.unblock_accounts"
-end
 #
 # every 4.days do
 #   runner "AnotherModel.prune_old_records"
