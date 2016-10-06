@@ -52,43 +52,63 @@ class Post
         end
       end
 
+      def download_image(item)
+        item.css("a+ a img").each do |image|
+            next if image["src"].include? "50x50" #we got the icon
+            image_url = image["src"]
+            if image_url != [] && image_url != nil
+                self.image_url = image_url
+                begin
+                    self.image = open(image_url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
+                rescue
+                    logger.error("Something went wrong with #{image_url}")
+                end
+            else
+                logger.error("Wrong image #{image_url}")
+            end
+        end
+      end
+
+      def set_title_and_description(item)
+        title = item.css(".content").text.gsub(/.*·/,"")
+        if title.length > 70 #more than 70 letters
+            tokenizer = Punkt::SentenceTokenizer.new(title)
+            segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
+            self.description = segments[1..99].join(" ")
+            self.title = segments[0]
+        else
+            self.title = title
+            self.description = ""
+        end
+      end
+
+      def set_url(item)
+        url = item.css(".itemtitle")[0]["href"]
+        if !url.include?(account)
+            logger.info("URL #{url} does not contain account #{account}.")
+            return nil #usually repostes and other shit
+        else
+            self.url = url
+        end
+      end
+
+      def set_time(item)
+        time = item.css("time").text
+        self.time = DateTime.parse(time)
+      end
+
+
       def self.create_post(item,account)
         url = item.css(".itemtitle")[0]["href"]
         post = Post.where(:url => url).first
         if post == nil
             logger.info("Collecting #{url} for #{account}")
             p = Post.new
-            image_url = item.css("a+ a img")[0]["src"] rescue []
-            if image_url != [] && image_url != nil
-                p.image_url = image_url
-                begin
-                    p.image = open(image_url)
-                rescue
-                    logger.error("Something went wrong with #{image_url}")
-                end
-            else
-                logger.error("Wrong image #{image_url}")
-                return nil
-            end
-            title = item.css(".content").text.gsub(/.*·/,"")
-            if title.length > 70 #more than 70 letters
-                tokenizer = Punkt::SentenceTokenizer.new(title)
-                segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
-                p.description = segments[1..99].join(" ")
-                p.title = segments[0]
-            else
-                p.title = title
-                p.description = ""
-            end
-            p.time = DateTime.parse(item.css("time").text)
-            url = item.css(".itemtitle")[0]["href"]
+            p.download_image(item)
+            p.set_title_and_description(item)
             p.account = account
-            if !url.include?(account)
-                logger.info("URL #{url} does not contain account #{account}.")
-                return nil #usually repostes and other shit
-            else
-                p.url = url
-            end
+            p.set_url(item)
+            p.set_time(item)
             p.save!
             logger.info("Saved post with #{url}")
         else
