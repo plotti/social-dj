@@ -110,8 +110,12 @@ class Post
             p.set_url(item)
             p.set_time(item)
             if p.image_url != nil
-                p.save!
-                logger.info("Saved post with #{url}")
+                begin
+                    p.save!
+                    logger.info("Saved post with #{url}")
+                rescue
+                    logger.info("Turns out that post already exists?! #{url}")
+                end
             else
                 logger.info("Skipped post #{url} because it did't have images.")
             end
