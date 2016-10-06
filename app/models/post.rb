@@ -24,6 +24,7 @@ class Post
         url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
         result = HTTParty.get(url)
         path = Rails.root
+        results = []
         no_capcha_needed = true
         if result.body.include?("Facebook captcha challenge")
             no_capcha_needed = false
