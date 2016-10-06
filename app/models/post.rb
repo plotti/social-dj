@@ -109,8 +109,12 @@ class Post
             p.account = account
             p.set_url(item)
             p.set_time(item)
-            p.save!
-            logger.info("Saved post with #{url}")
+            if p.image_url != nil
+                p.save!
+                logger.info("Saved post with #{url}")
+            else
+                logger.info("Skipped post #{url} because it did't have images.")
+            end
         else
             logger.info("Post with #{url} already exists.")
             p = post
