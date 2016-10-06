@@ -29,7 +29,7 @@ class Post
             no_capcha_needed = false
             logger.error("Capcha: Error collecting new items for #{url}.")
             logger.info("Trying to solve it.")
-            command = "php -f #{path}/fb-captcha-solver.php '#{url}' attempts=10"
+            command = "php -f #{path}/fb-captcha-solver.php '#{url}' 10"
             logger.info(command)
             result = `#{command}`
             logger.info(result)
@@ -50,6 +50,7 @@ class Post
         else
             logger.info("Could not solve capcha.")
         end
+        return results
       end
 
       def download_image(item)
