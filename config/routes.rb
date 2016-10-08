@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   match "adjust_ifttt_hook", to: "posts#adjust_ifttt_hook",via: [:get, :post]#, format: :js
 
 
-  root 'posts#login'
+  root 'posts#login', via: [:get, :post]
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
