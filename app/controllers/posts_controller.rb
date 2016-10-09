@@ -3,13 +3,14 @@ class PostsController < ApplicationController
 
     def login
         if current_user != nil
-            redirect_to url_for( :action => :index)
+            redirect_to url_for(:action => :index)
         end
     end
 
     def index
         if current_user == nil
-            redirect_to url_for(:action => :login)
+            redirect_to("/signout")
+            #redirect_to url_for(:action => :login)
         end
         if current_user.accounts == []
             redirect_to url_for(:action => :set_up_accounts)
