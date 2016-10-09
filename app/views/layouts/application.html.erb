@@ -9,6 +9,11 @@
   <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" %>
 </head>
 <body>
+    <script type="text/javascript">
+    if ( top === self ) {
+        window.top.location = '{fb_canvas_url}';
+    }
+    </script>
     <% if current_user %>
     <nav class="navbar navbar-default">
       <div class="container-fluid">
