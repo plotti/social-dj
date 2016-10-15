@@ -1,6 +1,7 @@
+<h1>Insert the accounts you like to consume here: </h1>
 <%= form_tag('/set_up_accounts', remote: true, :authenticity_token => true ) do %>
+    <input type="submit" class="btn btn-default" value="Update my accounts" >
     <div class="form-group">
-        <label for="exampleTextarea">Insert the accounts you like to consume here: </label>
         <textarea name="accounts" class="form-control" id="exampleTextarea" rows="20"><%= @accounts %></textarea>
         <input type="submit" class="btn btn-default" value="Update my accounts" >
     </div>

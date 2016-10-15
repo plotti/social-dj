@@ -9,56 +9,44 @@
   <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" %>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600">
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat:400,700">
-    
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/css/animate.css">
-    <link rel="stylesheet" href="assets/ultimate-flat-social-icons/ultm-css/ultm.css">
-    <link rel="stylesheet" href="assets/css/form-elements.css">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/media-queries.css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <!-- Favicon and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.png">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="assets/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
-
 </head>
 <body>
-    <% if current_user %>
-    <nav class="navbar navbar-default">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <ul class="nav navbar-nav">
-            <li>
-                <%= link_to 'Home', "/" %>
-            </li>
-            <li>
-                <%= link_to "Adjust my Accounts", set_up_accounts_path %>
-            </li>
-            <li>
-                <%= link_to "Adjust my IFFT Post hook", adjust_ifttt_hook_path %>
-            <li>
-            <li>
-                <%= link_to 'Logout', signout_path %>
-            </li>
-        </ul>
-        </div>
-      </div>
-    </nav>
-    <% end %>
+    <%= render :partial => "posts/navbar" %>
     <div class="container">
         <div id="notice" class="alert alert-info navbar navbar-default navbar-fixed-top" style="display: none;"></div>
         <%= yield %>
     </div>
+    <script>
+   
+    var createImage = function (src) {
+        var deferred = $.Deferred();
+        var img = new Image();
+
+        img.onload = function() {
+            deferred.resolve(img);
+        };
+        img.src = src;
+        return deferred.promise();
+    };
+
+    var startResize = function () {
+        $.when(
+            createImage($("#inputImage").attr('src'))
+        ).then(resize, function () {console.log('error')});
+    };
+
+    var resize = function (image) {
+        mainCanvas = document.createElement("canvas");
+        mainCanvas.width = 1024;
+        mainCanvas.height = 768;
+        var ctx = mainCanvas.getContext("2d");
+        ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
+        size = 200;
+        while (mainCanvas.width > size) {
+            mainCanvas = halfSize(mainCanvas);
+        }
+        $('#outputImage').attr('src', mainCanvas.toDataURL("image/jpeg"));
+    };
+    </script>
 </body>
 </html>

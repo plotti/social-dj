@@ -1,7 +1,19 @@
-<div class="jumbotron">
-        <h1>Social DJ</h1>
-        <p class="lead">Social DJ aggregates your favorites Facebook, Twitter, Instagram Pages for you and lets you decide what to post to your page. No stupid ads. No distractions. Just content.</p>
-        <p> 
-            <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn-lg btn-primary btn-block" %>
-        </p>
+<div class="top-content">
+    <div class="inner-bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-5 phone wow fadeInLeft">
+                    <%= image_tag "social-dj-logo.png" %>
+                </div>
+                <div class="col-sm-7 wow fadeInUp">
+                    <h1>Surf Facebook, Twitter, Instagram etc.. at the same time and with no distractions.</h1>
+                    <div class="description">Social DJ aggregates your favorites Facebook, Twitter, Instagram Pages for you and lets you decide what to post to your page. No stupid ads. No distractions. Just content.
+                    </div>
+                    <div class="top-download">
+                        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn-lg btn-block btn-primary " %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

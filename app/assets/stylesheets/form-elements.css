@@ -1,0 +1,124 @@
+
+input[type="text"], 
+textarea, 
+textarea.form-control {
+    margin: 0;
+    padding: 0 10px;
+    vertical-align: middle;
+    background: none;
+    border: 2px solid ;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 20px;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+}
+
+input[type="text"]:focus, 
+textarea:focus, 
+textarea.form-control:focus {
+	outline: 0;
+    border: 1px solid #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.contact-form form input, 
+.contact-form form textarea, 
+.contact-form form textarea.form-control { color: #aaa; border: 1px solid #aaa; }
+
+.contact-form form input:focus, 
+.contact-form form textarea:focus, 
+.contact-form form textarea.form-control:focus { color: #aaa; border: 2px solid #42bfc2; }
+
+input[type="text"]:-moz-placeholder { color: #fff; }
+input[type="text"]:-ms-input-placeholder { color: #fff; }
+input[type="text"]::-webkit-input-placeholder { color: #fff; }
+
+.contact-form form input[type="text"]:-moz-placeholder, 
+.contact-form form textarea:-moz-placeholder, 
+.contact-form form textarea.form-control:-moz-placeholder { color: #aaa; }
+
+.contact-form form input[type="text"]:-ms-input-placeholder, 
+.contact-form form textarea:-ms-input-placeholder, 
+.contact-form form textarea.form-control:-ms-input-placeholder { color: #aaa; }
+
+.contact-form form input[type="text"]::-webkit-input-placeholder, 
+.contact-form form textarea::-webkit-input-placeholder, 
+.contact-form form textarea.form-control::-webkit-input-placeholder { color: #aaa; }
+
+
+.subscribe button, 
+.contact-form button {
+	height: 52px;
+    margin: 0;
+    padding: 0 20px;
+    vertical-align: middle;
+    background: #fff;
+    border: 0;
+    font-family: 'Montserrat', sans-serif;
+	font-size: 18px;
+    font-weight: 400;
+    line-height: 52px;
+    color: #42bfc2;
+    text-transform: uppercase;
+    -moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+    text-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+}
+
+.contact-form button { background: #42bfc2; color: #fff; }
+
+.subscribe button:hover, 
+.contact-form button:hover {
+    background: #aaa;
+    color: #fff;
+    -o-transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -ms-transition: all .3s;
+    transition: all .3s;
+}
+
+.subscribe button:active, 
+.contact-form button:active {
+	outline: 0;
+    background: #aaa;
+    color: #fff;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.subscribe button:focus, 
+.contact-form button:focus {
+	outline: 0;
+	background: #aaa;
+	color: #fff;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus {
+	outline: 0;
+	background: #aaa;
+	color: #fff;
+}
