@@ -16,37 +16,5 @@
         <div id="notice" class="alert alert-info navbar navbar-default navbar-fixed-top" style="display: none;"></div>
         <%= yield %>
     </div>
-    <script>
-   
-    var createImage = function (src) {
-        var deferred = $.Deferred();
-        var img = new Image();
-
-        img.onload = function() {
-            deferred.resolve(img);
-        };
-        img.src = src;
-        return deferred.promise();
-    };
-
-    var startResize = function () {
-        $.when(
-            createImage($("#inputImage").attr('src'))
-        ).then(resize, function () {console.log('error')});
-    };
-
-    var resize = function (image) {
-        mainCanvas = document.createElement("canvas");
-        mainCanvas.width = 1024;
-        mainCanvas.height = 768;
-        var ctx = mainCanvas.getContext("2d");
-        ctx.drawImage(image, 0, 0, mainCanvas.width, mainCanvas.height);
-        size = 200;
-        while (mainCanvas.width > size) {
-            mainCanvas = halfSize(mainCanvas);
-        }
-        $('#outputImage').attr('src', mainCanvas.toDataURL("image/jpeg"));
-    };
-    </script>
 </body>
 </html>
