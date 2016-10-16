@@ -15,12 +15,54 @@ class Post
       def self.collect_new_posts
         accounts = User.all.collect{|s| s.accounts}.flatten
         accounts.each do |account|
-            result = Post.get_new_posts(account)
-            logger.info("Collected #{result.count} new items for #{account}. #{Post.count}")
+            results = Post.get_new_posts(account)
+            logger.info("Collected #{results.count} new items for #{account}. #{Post.count}")
         end
       end
   
-      def self.get_new_posts(account)
+      def self.get_new_posts(account_url)
+        if account.include?("facebook")
+          results = Post.get_new_fb_posts(account)
+        elsif account.include?("twitter")
+          results = Post.get_new_twitter_posts(account)
+        elsif account.include?("instagram")
+          results = Post.get_new_instagram_posts(account)
+        else
+          logger.info("Type of account not supported yet: #{account}")
+        end
+      end
+
+      def self.get_new_twitter_posts(account_url)
+        account = account_url.match(/twitter.com\/(.*)/)[1].gsub("/","")
+        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Twitter&u=#{account}&format=Html"
+        result = HTTParty.get(url)
+        doc = Nokogiri::HTML(result.body)
+        results = []
+        doc.css(".feeditem").each do |item|
+            p = Post.create_post(item,account_url)
+            next if p == nil
+            results << p
+        end
+        return results
+      end
+
+      def self.get_new_instagram_posts(account_url)
+        account = account_url.match(/instagram.com\/(.*)/)[1].gsub("/","")
+        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Instagram&u=#{account}&format=Html"
+        result = HTTParty.get(url)
+        doc = Nokogiri::HTML(result.body)
+        results = []
+        doc.css(".feeditem").each do |item|
+            p = Post.create_post(item,account_url,{:image_selector => "img", :text_selector => "h2"})
+            next if p == nil
+            results << p
+        end
+        return results
+      end
+
+
+      def self.get_new_fb_posts(account)
+        account = account_url.match(/www.facebook.com\/(.*)/)[1].gsub("/","")
         url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
         result = HTTParty.get(url)
         path = Rails.root
@@ -43,7 +85,7 @@ class Post
             doc = Nokogiri::HTML(result.body)
             results = []
             doc.css(".feeditem").each do |item|
-                p = Post.create_post(item,account)
+                p = Post.create_post(item,account_url)
                 next if p == nil
                 results << p
             end
@@ -54,8 +96,8 @@ class Post
         return results
       end
 
-      def download_image(item)
-        item.css("a+ a img").each do |image|
+      def download_image(item,selector="a+ a img")
+        item.css(selector).each do |image|
             next if image["src"].include? "50x50" #we got the icon
             image_url = image["src"]
             if image_url != [] && image_url != nil
@@ -71,8 +113,8 @@ class Post
         end
       end
 
-      def set_title_and_description(item)
-        title = item.css(".content").text.gsub(/.*·/,"")
+      def set_title_and_description(item,selector=".content")
+        title = item.css(selector).text.gsub(/.*·/,"")
         if title.length > 70 #more than 70 letters
             tokenizer = Punkt::SentenceTokenizer.new(title)
             segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
@@ -86,7 +128,7 @@ class Post
 
       def set_url(item)
         url = item.css(".itemtitle")[0]["href"]
-        if !url.include?(account)
+        if !url.include?(account) && url.include?("fbcdn")
             logger.info("URL #{url} does not contain account #{account}.")
             return nil #usually repostes and other shit
         else
@@ -100,14 +142,16 @@ class Post
       end
 
 
-      def self.create_post(item,account)
+      def self.create_post(item,account,options={})
+        default_options = {:image_selector => "a+ a img", :text_selector => ".content"}
+        options = default_options.merge(options)
         url = item.css(".itemtitle")[0]["href"]
         post = Post.where(:url => url).first
         if post == nil
             logger.info("Collecting #{url} for #{account}")
             p = Post.new
-            p.download_image(item)
-            p.set_title_and_description(item)
+            p.download_image(item,options[:image_selector])
+            p.set_title_and_description(item,options[:text_selector])
             p.account = account
             p.set_url(item)
             p.set_time(item)

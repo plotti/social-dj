@@ -28,16 +28,15 @@ class PostsController < ApplicationController
     def set_up_accounts
         if request.post?
             accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","")}
-            puts accounts
-            accounts = accounts.collect{|s| s.match(/www.facebook.com\/(.*)/)[1].gsub("/","") }
+            #accounts = accounts.collect{|s| s.match(/www.facebook.com\/(.*)/)[1].gsub("/","") }
             current_user.accounts = accounts
             current_user.save
             redirect_to url_for(:action => :index)
         else
             if current_user.accounts == []
-                @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").join("\n")
+                @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").values.flatten.join("\n")
             else
-                @accounts = current_user.accounts.collect{|s| "https://www.facebook.com/#{s}"}.join("\n")
+                @accounts = current_user.accounts.join("\n") #.collect{|s| "https://www.facebook.com/#{s}"}.join("\n")
             end
         end
     end

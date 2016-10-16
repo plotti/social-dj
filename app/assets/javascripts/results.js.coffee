@@ -1,7 +1,7 @@
 $ ->
   # Configure infinite table
-  $('#feed').infinitePages
-    # debug: true
+  $('#feed').infinitescroll
+    debug: true
     loading: ->
       $(this).text('Loading next page...')
     error: ->
