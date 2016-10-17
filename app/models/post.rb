@@ -61,7 +61,7 @@ class Post
       end
 
 
-      def self.get_new_fb_posts(account)
+      def self.get_new_fb_posts(account_url)
         account = account_url.match(/www.facebook.com\/(.*)/)[1].gsub("/","")
         url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
         result = HTTParty.get(url)
