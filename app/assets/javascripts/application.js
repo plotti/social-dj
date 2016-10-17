@@ -15,4 +15,4 @@
 //= require turbolinks
 //= require jquery.infinite-pages
 //= require jquery.infinitescroll
-//= require_tree .
+//= require posts.js

@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   match "post_to_facebook", to: "posts#post_to_facebook",via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
   match "set_up_accounts", to: "posts#set_up_accounts",via: [:get, :post]#, format: :js
   match "adjust_ifttt_hook", to: "posts#adjust_ifttt_hook",via: [:get, :post]#, format: :js
-
-
   root 'posts#login', via: [:get, :post]
 
   # Example of regular route:
