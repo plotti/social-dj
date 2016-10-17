@@ -21,14 +21,14 @@ class Post
       end
   
       def self.get_new_posts(account_url)
-        if account.include?("facebook")
-          results = Post.get_new_fb_posts(account)
-        elsif account.include?("twitter")
-          results = Post.get_new_twitter_posts(account)
-        elsif account.include?("instagram")
-          results = Post.get_new_instagram_posts(account)
+        if account_url.include?("facebook")
+          results = Post.get_new_fb_posts(account_url)
+        elsif account_url.include?("twitter")
+          results = Post.get_new_twitter_posts(account_url)
+        elsif account_url.include?("instagram")
+          results = Post.get_new_instagram_posts(account_url)
         else
-          logger.info("Type of account not supported yet: #{account}")
+          logger.info("Type of account not supported yet: #{account_url}")
         end
       end
 
