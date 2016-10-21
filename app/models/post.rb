@@ -120,7 +120,12 @@ class Post
             tokenizer = Punkt::SentenceTokenizer.new(title)
             segments = tokenizer.sentences_from_text(title, :output => :sentences_text)
             self.description = segments[1..99].join(" ")
-            self.title = segments[0]
+            if segments[0].length > 70
+                temp = segments[0].truncate(70)
+            else
+                temp = segments[0]
+            end
+            self.title = temp
         else
             self.title = title
             self.description = ""

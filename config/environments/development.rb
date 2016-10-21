@@ -14,7 +14,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = false
 
   #no assets
-  config.serve_static_files = false
+  config.serve_static_files = true
  
   # no cache
   config.assets.cache_store = :null_store  # Disables the Asset cache
