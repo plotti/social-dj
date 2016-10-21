@@ -1,21 +1,21 @@
 <% @posts.each do |post| %>
     <%= form_tag('/post_to_facebook', remote: true, :authenticity_token => true ) do %>
         <div class="row">
-            <div class="col-sm-12 text-xs-center">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">
-                            <%= "#{post.title}" %> 
-                        </h3>
-                    </div>    
-                    <input name="url" type="hidden" value='<%= post.url %>'/>
-                    <input name="image" type="hidden" value='<%= post.image.url %>'/>
-                    <input name="title" type="hidden" value='<%= post.title %>'/>
-                    <input name="id" type="hidden" value='<%= post.id %>'/>
-                    <div class="panel-body">
-                        <div style="background: url('<%=image_url(post.image.url)%>') center center no-repeat; min-height:600px;  background-size:contain;"></div>
+            <div class="col s12 m12 l12">
+                <div class="card">
+                    <div class="card-image">
+                        <%= link_to(image_tag(post.image.url),post.url) %>
+                        <span class="card-title"><%= "#{post.title}" %></span>
+                    </div>
+                    <div class="card-content">
+                        <input name="url" type="hidden" value='<%= post.url %>'/>
+                        <input name="image" type="hidden" value='<%= post.image.url %>'/>
+                        <input name="title" type="hidden" value='<%= post.title %>'/>
+                        <input name="id" type="hidden" value='<%= post.id %>'/>
                         <p><%= post.description %></p>
-                        <input type="submit" class="btn-lg btn-block btn-primary" value="Post to Facebookpage" >
+                    </div>
+                    <div class="card-action">
+                        <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to Facebookpage" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" >
                     </div>
                 </div>
             </div>

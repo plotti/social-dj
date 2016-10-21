@@ -1,8 +1,19 @@
-<h1>Insert the accounts you like to consume here: </h1>
-<%= form_tag('/set_up_accounts', remote: true, :authenticity_token => true ) do %>
-    <input type="submit" class="btn btn-default" value="Update my accounts" >
-    <div class="form-group">
-        <textarea name="accounts" class="form-control" id="exampleTextarea" rows="20"><%= @accounts %></textarea>
-        <input type="submit" class="btn btn-default" value="Update my accounts" >
-    </div>
-<% end %>
+<div class="row">
+    <h3>Insert the accounts you like to consume here</h3>
+    <%= form_tag('/set_up_accounts', remote: true, :authenticity_token => true, :class=>"col s12" ) do %>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="accounts" class="materialize-textarea" id="exampleTextarea"><%= @accounts %></textarea>
+                <input type="submit" class="btn waves-effect waves-light" value="Update my accounts" >
+            </div>
+        </div>
+    <% end %>
+</div>
+<script>
+$('#exampleTextarea').each(function () {
+  this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+}).on('input', function () {
+  this.style.height = 'auto';
+  this.style.height = (this.scrollHeight) + 'px';
+});
+</script>

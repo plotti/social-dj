@@ -1,19 +1,26 @@
-<div class="top-content">
-    <div class="inner-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-xs-12 col-sm-12 col-lg-6 text-center">
-                    <%= image_tag "social-dj-logo.png", :class => "img-responsive"%>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-lg-6">
-                    <h1>Surf Facebook, Twitter, Instagram etc.. at the same time and with no distractions.</h1>
-                    <div class="description">Social DJ aggregates your favorites Facebook, Twitter, Instagram Pages for you and lets you decide what to post to your page. No stupid ads. No distractions. Just content.
-                    </div>
-                    <div class="top-download">
-                        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "btn-lg btn-block btn-primary " %>
-                    </div>
-                </div>
+<style>
+.background-login {
+   position:absolute;
+  left:0px;
+  top:0px;
+  width:100%;
+  height:100%;
+}
+</style>
+<div class="background-login">
+<div class="row">
+    <div class="col s12 m12 l6 offset-l3">
+        <div class="card">
+            <div class="card-image">
+              <%= image_tag "social-dj-logo.png" %>
+            </div>
+            <div class="card-content">
+              <p class="flow-text">Surf Facebook, Twitter, Instagram at the same time and with no distractions. Social DJ aggregates your favorite pages and lets you decide what to post where. No stupid ads. No distractions. Just content.</p>
+            </div>
+            <div class="card-action">
+                <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "waves-effect waves-light btn-large" %>
             </div>
         </div>
     </div>
+</div>
 </div>

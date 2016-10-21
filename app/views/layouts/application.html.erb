@@ -4,18 +4,30 @@
   <title>Social DJ</title>
   <%= csrf_meta_tags %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js" %>
-  <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" %>
-  <%= stylesheet_link_tag "https://cdn.datatables.net/1.10.12/css/dataTables.bootstrap.min.css" %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js"></script>
   <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js" %>
-  <%= javascript_include_tag "https://cdn.datatables.net/1.10.12/js/dataTables.bootstrap.min.js" %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 </head>
 <body>
     <%= render :partial => "posts/navbar" %>
     <div class="container">
-        <div id="notice" class="alert alert-info navbar navbar-default navbar-fixed-top" style="display: none;"></div>
         <%= yield %>
     </div>
+    <script>
+        $( document ).ready(function(){
+            $(".button-collapse").sideNav();
+            $('#feed').infinitePages({
+                loading: function() {
+                    return $(this).text('Loading next page...');
+                },
+                error: function() {
+                    return $(this).button('There was an error, please try again');
+                }
+            });
+        })
+    </script>
 </body>
 </html>
