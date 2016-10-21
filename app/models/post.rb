@@ -9,6 +9,7 @@ class Post
       field :account, type: String, default: ""
       field :movie_poster, type: String
       field :image_url, type: String, default: ""
+      field :posted_by, type:Array, default: []
       mount_uploader :image, PostUploader
       validates_uniqueness_of :url
 

@@ -35,7 +35,8 @@
 }
 
 @media (max-width: 767px) {
-	
+    .description {font-size: 50px;}
+
 	.section-description p { padding: 0; }
     
     .top-content .text { text-align: center; }

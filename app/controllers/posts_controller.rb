@@ -55,10 +55,17 @@ class PostsController < ApplicationController
         end
     end 
 
+    def statistics
+        @posts = Post.where(:posted_by => current_user.id).group_by(&:account)#.map{|key,val| {key => val.sum(&:posted_by)}}
+    end
+
     def post_to_facebook
         url = current_user.ifttt_hook
         image_url = request.protocol + request.host_with_port + params["image"].gsub("jpg/","jpg")
         logger.info("Posted #{image_url} with #{params["title"]}")
+        post = Post.where(:id => params["id"]).first
+        post.posted_by << current_user.id
+        post.save
         @result = HTTParty.post(url, 
         :body => {  
                :value1 => image_url, 
