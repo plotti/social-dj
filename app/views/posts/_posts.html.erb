@@ -5,15 +5,22 @@
                 <div class="card">
                     <div class="card-image">
                         <%= link_to(image_tag(post.image.url),post.url) %>
-                        <span class="card-title"><%= "#{post.title}" %></span>
                     </div>
                     <div class="card-content">
                         <input name="url" type="hidden" value='<%= post.url %>'/>
                         <input name="image" type="hidden" value='<%= post.image.url %>'/>
                         <input name="title" type="hidden" value='<%= post.title %>'/>
                         <input name="id" type="hidden" value='<%= post.id %>'/>
+                        <% if post.description != "" %>
+                        <span class="card-title activator grey-text text-darken-4"><%= "#{post.title}" %><i class="material-icons right">more_vert</i></span>
+                        <% end %>
+                    </div>
+                    <% if post.description != "" %>
+                    <div class="card-reveal">
+                        <span class="card-title grey-text text-darken-4"><%= "#{post.title}" %><i class="material-icons right">close</i></span>
                         <p><%= post.description %></p>
                     </div>
+                    <% end %>
                     <div class="card-action">
                         <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to Facebookpage" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" >
                     </div>
