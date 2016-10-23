@@ -228,6 +228,7 @@ DEPENDENCIES
   carrierwave-mimetype-fu
   carrierwave-mongoid
   coffee-rails (~> 4.1.0)
+  faraday_middleware
   feedjira
   httparty
   jbuilder (~> 2.0)
