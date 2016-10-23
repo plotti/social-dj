@@ -54,7 +54,7 @@ class Post
                 p.account = account_url
                 p.url = url
                 p.time = entry.updated.to_datetime
-                if p.image != nil
+                if p.remote_image_url != nil
                     begin
                         p.save!
                         logger.info("Saved post with #{url}")
