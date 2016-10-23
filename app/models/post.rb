@@ -44,7 +44,7 @@ class Post
                 logger.info("Collecting #{url} for #{account_url}")
                 p = Post.new
                 begin
-                    image_url = Nokogiri::HTML(entry.content).at('a:contains("link")')["href"].gsub(".gifv",".gif")
+                    image_url = Nokogiri::HTML(entry.content).at('a:contains("link")')["href"].gsub(".gifv",".mp4")
                     p.remote_image_url = image_url#,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
                 rescue
                     logger.error("Something went wrong with #{image_url}")

@@ -6,6 +6,10 @@
                     <div class="card-image">
                         <% if post.image.url.include?("gif") %>
                             <img data-gifffer=<%= post.image.url %> />
+                        <% elsif post.image.url.include?("mp4") %>
+                            <video width="100%" controls>
+                                <source src="<%= post.image.url %>" type="video/mp4">
+                            </video>
                         <% else %>
                             <img src="<%= post.image.url %>" />
                         <% end %>
