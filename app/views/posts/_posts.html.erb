@@ -4,7 +4,11 @@
             <div class="col s12 m12 l12">
                 <div class="card">
                     <div class="card-image">
-                        <%= link_to(image_tag(post.image.url),post.url, :target => "_blank") %>
+                        <% if post.image.url.include?("gif") %>
+                            <img data-gifffer=<%= post.image.url %> />
+                        <% else %>
+                            <img src="<%= post.image.url %>" />
+                        <% end %>
                     </div>
                     <div class="card-content">
                         <input name="url" type="hidden" value='<%= post.url %>'/>
@@ -12,9 +16,9 @@
                         <input name="title" type="hidden" value='<%= post.title %>'/>
                         <input name="id" type="hidden" value='<%= post.id %>'/>
                         <% if post.description != "" %>
-                        <span class="card-title activator grey-text text-darken-4"><%= "#{post.title}" %><i class="material-icons right">more_vert</i></span>
+                            <span class="card-title activator grey-text text-darken-4"><%= link_to(post.title, post.url) %><i class="material-icons right">more_vert</i></span>
                         <% else %>
-                        <span class="card-title "><%= "#{post.title}" %></span>
+                            <span class="card-title "><%= link_to(post.title, post.url) %></span>
                         <% end %>
                     </div>
                     <% if post.description != "" %>

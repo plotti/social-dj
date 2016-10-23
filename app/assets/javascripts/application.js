@@ -14,3 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require jquery.infinite-pages
+//= require imagesloaded
+//= require giffer
