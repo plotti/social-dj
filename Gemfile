@@ -12,6 +12,7 @@ gem "koala"
 gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem "carrierwave-mimetype-fu"
 gem "whenever"
+gem 'feedjira'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

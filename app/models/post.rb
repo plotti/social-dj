@@ -28,8 +28,46 @@ class Post
           results = Post.get_new_twitter_posts(account_url)
         elsif account_url.include?("instagram")
           results = Post.get_new_instagram_posts(account_url)
+        elsif account_url.include?("reddit")
+          results = Post.get_new_reddit_posts(account_url)
         else
           logger.info("Type of account not supported yet: #{account_url}")
+        end
+      end
+
+      def self.get_new_reddit_posts(account_url="https://www.reddit.com/r/woahdude.rss")
+        feed = Feedjira::Feed.fetch_and_parse account_url
+        feed.entries.each do |entry|
+            url = entry.url
+            post = Post.where(:url => url).first
+            if post == nil
+                logger.info("Collecting #{url} for #{account_url}")
+                p = Post.new
+                begin
+                    image_url = Nokogiri::HTML(entry.content).at('a:contains("link")')["href"].gsub(".gifv",".gif")
+                    p.remote_image_url = image_url#,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
+                rescue
+                    logger.error("Something went wrong with #{image_url}")
+                end
+                p.title = entry.title
+                p.description = ""
+                p.account = account_url
+                p.url = url
+                p.time = entry.updated.to_datetime
+                if p.image != nil
+                    begin
+                        p.save!
+                        logger.info("Saved post with #{url}")
+                    rescue
+                        logger.info("Turns out that post already exists?! #{url}")
+                    end
+                else
+                    logger.info("Skipped post #{url} because it did't have images.")
+                end
+            else
+                logger.info("Post with #{url} already exists.")
+                p = post
+            end
         end
       end
 
