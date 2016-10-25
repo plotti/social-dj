@@ -142,7 +142,9 @@ class Post
             if image_url != [] && image_url != nil
                 self.image_url = image_url
                 begin
-                    self.image = open(image_url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
+                    logger.info("Downloading Image url #{image_url}")
+                    self.remote_image_url = image_url#,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
+                    #self.image = open(image_url,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
                 rescue
                     logger.error("Something went wrong with #{image_url}")
                 end

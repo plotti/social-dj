@@ -5,7 +5,7 @@ class PostUploader < CarrierWave::Uploader::Base
   include CarrierWave::MimeTypes
 
   def extension_white_list
-    %w(jpg jpeg gif png gifv mp4)
+    %w(jpg jpeg gif png gifv mp4 php)
   end
 
   # Choose what kind of storage to use for this uploader:
