@@ -65,14 +65,15 @@ class PostsController < ApplicationController
         title = params["title"] 
         logger.info("Posted #{image_url} with #{title}")
         post = Post.where(:id => params["id"]).first
-        if image_url.include? ("mp4")
-
+        if image_url.include?("gif")
+            title = "<a href='#{post.url}'>#{title}</a>"
+        end
         post.posted_by << current_user.id
         post.save
         @result = HTTParty.post(url, 
         :body => {  
                :value1 => image_url, 
-               :value2 => 
+               :value2 => title,
              }.to_json,
         :headers => { 'Content-Type' => 'application/json' } )
         respond_to do |format|
