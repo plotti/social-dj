@@ -62,14 +62,17 @@ class PostsController < ApplicationController
     def post_to_facebook
         url = current_user.ifttt_hook
         image_url = request.protocol + request.host_with_port + params["image"].gsub("jpg/","jpg")
-        logger.info("Posted #{image_url} with #{params["title"]}")
+        title = params["title"] 
+        logger.info("Posted #{image_url} with #{title}")
         post = Post.where(:id => params["id"]).first
+        if image_url.include? ("mp4")
+
         post.posted_by << current_user.id
         post.save
         @result = HTTParty.post(url, 
         :body => {  
                :value1 => image_url, 
-               :value2 => params["title"] 
+               :value2 => 
              }.to_json,
         :headers => { 'Content-Type' => 'application/json' } )
         respond_to do |format|
