@@ -152,7 +152,6 @@ class Post
                 logger.error("Wrong image #{image_url}")
             end
         end
-        self.save!
       end
 
       def set_title_and_description(item,selector=".content")
