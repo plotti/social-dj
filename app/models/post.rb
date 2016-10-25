@@ -199,7 +199,7 @@ class Post
             p.account = account
             p.set_url(item)
             p.set_time(item)
-            if p.image_url != nil
+            if p.image != nil
                 begin
                     p.save!
                     logger.info("Saved post with #{url}")
