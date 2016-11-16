@@ -1,7 +1,7 @@
 <% @posts.each do |post| %>
     <%= form_tag('/post_to_facebook', remote: true, :authenticity_token => true ) do %>
         <div class="row">
-            <div class="col s12 m12 l12">
+            <div class="col s12 m12 l6 offset-l3">
                 <div class="card">
                     <div class="card-image">
                         <% if post.image.url.include?("gif") %>
