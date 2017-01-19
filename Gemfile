@@ -4,7 +4,8 @@ gem "httparty"
 gem "mongoid", '~> 5.1'
 gem "nokogiri"
 gem 'jquery-infinite-pages'
-gem "kaminari", '~> 0.17'
+gem 'kaminari', '~> 1.0'
+gem 'kaminari-mongoid', :git => 'git@github.com:kaminari/kaminari-mongoid.git'
 gem 'punkt-segmenter'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'

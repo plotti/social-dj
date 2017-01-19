@@ -1,3 +1,11 @@
+GIT
+  remote: git@github.com:kaminari/kaminari-mongoid.git
+  revision: 6d97ac9e50e81e78df0b4f95ba04a3b11da51b0a
+  specs:
+    kaminari-mongoid (1.0.0)
+      kaminari-core (= 1.0.0)
+      mongoid
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -106,9 +114,18 @@ GEM
     json (1.8.6)
     jwt (0.1.13)
       multi_json (>= 1.5)
-    kaminari (0.17.0)
-      actionpack (>= 3.0.0)
-      activesupport (>= 3.0.0)
+    kaminari (1.0.0)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.0.0)
+      kaminari-activerecord (= 1.0.0)
+      kaminari-core (= 1.0.0)
+    kaminari-actionview (1.0.0)
+      actionview
+      kaminari-core (= 1.0.0)
+    kaminari-activerecord (1.0.0)
+      activerecord
+      kaminari-core (= 1.0.0)
+    kaminari-core (1.0.0)
     koala (2.4.0)
       addressable
       faraday
@@ -246,7 +263,8 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-infinite-pages
   jquery-rails
-  kaminari (~> 0.17)
+  kaminari (~> 1.0)
+  kaminari-mongoid!
   koala
   mongoid (~> 5.1)
   nokogiri
