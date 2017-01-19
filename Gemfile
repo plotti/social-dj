@@ -4,7 +4,7 @@ gem "httparty"
 gem "mongoid"
 gem "nokogiri"
 gem 'jquery-infinite-pages'
-gem "kaminari"
+gem "kaminari", '~> 0.17'
 gem 'punkt-segmenter'
 gem 'omniauth'
 gem 'omniauth-facebook', '1.4.0'
