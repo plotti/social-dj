@@ -3,10 +3,12 @@ class PostsController < ApplicationController
 
     def login
         if params["signed_request"] != nil
+            puts "blubb"
             session[:user_id] = Koala::Facebook::OAuth.new('1056289671111906','e2adb04ef6ed37cbfaf7788f4e8f16f4').parse_signed_request(params["signed_request"])["user_id"]
             redirect_to url_for(:action => :index)
         end 
         if current_user != nil
+            puts "AHA"
             redirect_to url_for(:action => :index)
         end
     end
@@ -18,8 +20,8 @@ class PostsController < ApplicationController
         end
         if current_user.accounts == []
             redirect_to url_for(:action => :set_up_accounts)
-        elsif current_user.ifttt_hook == nil
-            redirect_to url_for(:action => :adjust_ifttt_hook)
+        # elsif current_user.ifttt_hook == nil
+        #     redirect_to url_for(:action => :adjust_ifttt_hook)
         else
             @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
         end
@@ -33,7 +35,7 @@ class PostsController < ApplicationController
             current_user.save
             redirect_to url_for(:action => :index)
         else
-            if current_user.accounts == []
+            if current_user.accounts == [] || current_user.accounts == nil
                 @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").values.flatten.join("\n")
             else
                 @accounts = current_user.accounts.join("\n") #.collect{|s| "https://www.facebook.com/#{s}"}.join("\n")

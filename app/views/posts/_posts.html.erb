@@ -32,7 +32,7 @@
                     </div>
                     <% end %>
                     <div class="card-action">
-                        <% if !post.image.url.include?("mp4") %>
+                        <% if !post.image.url.include?("mp4") && current_user.ifttt_hook != nil %>
                             <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to Facebookpage" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" >
                         <% end %>
                     </div>

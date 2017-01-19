@@ -20,6 +20,7 @@
         $( document ).ready(function(){
             $(".button-collapse").sideNav();
             $('.materialboxed').materialbox();
+            $('.modal').modal();
             $('#feed').infinitePages({
                 loading: function() {
                     return $(this).text('Loading next page...');

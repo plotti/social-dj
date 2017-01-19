@@ -1,26 +1,44 @@
 <h3>Adjust your IFTTT hook</h3>
+<p>If you want you can set up any IFTTT hook, that allows you for example to also post to your facebook page from here. Or you might create your own hook to post to instagram. I have prepared one example that allows you to post to your facebook page. Follow the instructions below.</p>
+
 <div class="row">
-    <%= form_tag('/adjust_ifttt_hook', remote: true, :authenticity_token => true, :class => "col s12" ) do %>
-        <div class="row">
-            <div class="input-field col s12">
-                <input type="text" name="ifttt_hook" id="exampleTextarea" value="<%= @ifttt_hook %>">
-                <label for="exampleTextarea">Insert your Maker URL hook here:</label>
-            </div>        
-            <input type="submit" class="btn waves-effect waves-light" value="Update my ifttt hook" >
-        </div>
-    <% end %>
+    <div class="col s12 m12 l6">
+        <h5>Use your own custom hook</h5>
+        <%= form_tag('/adjust_ifttt_hook', remote: true, :authenticity_token => true, :class => "col s12" ) do %>
+            <div class="row">
+                <div class="input-field col s12">
+                    <input type="text" name="ifttt_hook" id="exampleTextarea" value="<%= @ifttt_hook %>">
+                    <label for="exampleTextarea">Insert your Maker URL hook here:</label>
+                </div>        
+                <input type="submit" class="btn waves-effect waves-light" value="Update my ifttt hook" >
+            </div>
+        <% end %>
+    </div>
+    <div class="col s12 m12 l6">
+        <h5>Or follow the post to Facebook Page Example</h5>
+        <ol>
+            <li><a data-target="modal1" href="<%= image_url("tutorial.gif") %>">Click here to see a video of how to do it</a></li>
+        </ol>
+        If you prefer to read:
+        <ol>
+            <li>Go to: <%= link_to "IFTT Post to Facebook page hook", "https://ifttt.com/recipes/470751-facebook-dj-post-to-your-page" %> </li>
+            <li>Eventually you will need to "connect" your facebook page to ifttt. </li>
+            <li>Eventually you will need to "connect" maker hook. 
+            <li>Enter post_to_facebook into the event field</li>
+            <li>Click Add </li>
+            <li>Search for the maker channel</li>
+            <li>Note down your key: e.g. it look something like this: dp2XUqkdrC8BxnED9mzsqF </li>
+            <li>Put https://maker.ifttt.com/trigger/post_to_facebook/with/key/dp2XUqkdrC8BxnED9mzsqF" into this box to make it work.</li>
+        </ol>
+    </div>
 </div>
-<div class="row">
-    <ul>
-        <li></li>
-        <li>Go to: <%= link_to "IFTT", "https://ifttt.com/recipes/470751-facebook-dj-post-to-your-page" %> </li>
-        <li>Eventually you will need to "connect" your facebook page to ifttt. </li>
-        <li>Eventually you will need to "connect" maker hook. 
-        <li>Enter post_to_facebook into the event field</li>
-        <li>Click Add </li>
-        <li>Search for the maker channel</li>
-        <li>Note down your key: e.g. it look something like this: dp2XUqkdrC8BxnED9mzsqF </li>
-        <li>Put https://maker.ifttt.com/trigger/post_to_facebook/with/key/dp2XUqkdrC8BxnED9mzsqF" into this box to make it work.</li>
-    </ul>
-    <img class="materialboxed" data-caption="How to adjust your IFTTT hook" width="500" src="<%= image_url("tutorial.gif") %>">
+
+<div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <img class="materialboxed" data-caption="How to adjust your IFTTT hook" width="500" src="<%=  %>">
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class=" modal-action modal-close waves-effect waves-green btn-flat">Agree</a>
+    </div>
 </div>

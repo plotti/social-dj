@@ -16,6 +16,9 @@ Rails.application.configure do
   #no assets
   config.serve_static_files = true
  
+  #devise mailer
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  
   # no cache
   config.assets.cache_store = :null_store  # Disables the Asset cache
   config.sass.cache = false  # Disable the SASS compiler cache
