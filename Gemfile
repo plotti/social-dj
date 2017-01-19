@@ -1,7 +1,7 @@
 source 'http://rubygems.org'
 
 gem "httparty"
-gem "mongoid"
+gem "mongoid", '~> 5.1'
 gem "nokogiri"
 gem 'jquery-infinite-pages'
 gem "kaminari", '~> 0.17'
