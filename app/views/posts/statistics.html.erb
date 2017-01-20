@@ -6,6 +6,7 @@
             <th>Account</th>
             <th>Number of Posts posted</th>
             <th>Number of Posts in DB</th>
+            <th>Percentage of Posts posted</th>
           </tr>
         </thead>
         <tbody>
@@ -14,6 +15,7 @@
             <td><%= k %></td>
             <td><%= v.collect{|s| s.posted_by}.flatten.count %></td>
             <td><%= Post.where(:account => k).count %></td>
+            <td><%= '%.2f' % (Post.where(:account => k).count.to_f/v.collect{|s| s.posted_by}.flatten.count) %></td>
           </tr>
           <% end %>
         </tbody>
