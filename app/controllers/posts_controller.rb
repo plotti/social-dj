@@ -18,7 +18,7 @@ class PostsController < ApplicationController
             redirect_to("/signout")
             #redirect_to url_for(:action => :login)
         end
-        if current_user.accounts == []
+        if current_user.accounts == [] || current_user.accounts == nil
             redirect_to url_for(:action => :set_up_accounts)
         # elsif current_user.ifttt_hook == nil
         #     redirect_to url_for(:action => :adjust_ifttt_hook)
