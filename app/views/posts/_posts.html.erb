@@ -7,7 +7,7 @@
                         <% if post.image.url.include?("gif") %>
                             <img data-gifffer=<%= post.image.url %> />
                         <% elsif post.image.url.include?("mp4") %>
-                            <video width="100%" controls>
+                            <video width="100%" controls loop>
                                 <source src="<%= post.image.url %>" type="video/mp4">
                             </video>
                         <% else %>
