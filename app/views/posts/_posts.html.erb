@@ -35,6 +35,23 @@
                         <% if !post.image.url.include?("mp4") && current_user.ifttt_hook != nil %>
                             <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to Facebookpage" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" >
                         <% end %>
+                            <div class="fixed-action-btn vertical" style="position: absolute; display: inline-block; right: 19px;">
+                              <a class="btn-floating btn-large mdi mdi-share-variant">
+                                <i class="mdi-social-notifications-none"></i>
+                              </a>
+                              <ul>
+                                <li>
+                                    <a class="btn-floating blue" href="https://twitter.com/home?status=<%= post.url %>" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="large mdi mdi-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a class="btn-floating blue" href="https://www.facebook.com/sharer/sharer.php?u=<%= post.url %>" onclick="window.open(this.href, 'mywin', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;"><i class="large mdi mdi-facebook"></i>
+                                    </a>
+                                </li>
+                                <li><a href="whatsapp://send?text=<%= post.url %>" data-action="share/whatsapp/share" class="btn-floating green"><i class="large mdi mdi-whatsapp"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                            </div>
                     </div>
                 </div>
             </div>

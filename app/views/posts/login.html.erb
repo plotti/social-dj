@@ -1,15 +1,15 @@
 
 <div class="row">
-    <div class="col s12 m12 l6 offset-l3">
+    <div class="col s12 m12 l6 offset-l3 ">
         <div class="card">
             <div class="card-image">
               <%= image_tag "social-dj-logo.png" %>
             </div>
             <div class="card-content">
-              <p class="flow-text">Surf Facebook, Twitter, Instagram at the same time. You decide what to post where. No ads. No distractions. Just content. <%= link_to "Open Source", "https://github.com/plotti/social-dj" %>.</p>
+              <p class="flow-text">Surf Facebook, Twitter, Instagram in one place. You decide what to post where. No ads. No distractions. Just content. <%= link_to "Open Source", "https://github.com/plotti/social-dj" %>.</p>
             </div>
             <div class="card-action">
-                <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in", :class => "waves-effect waves-light btn-large" %>
+                <a class="waves-effect waves-light btn-large" href="/auth/facebook"><i class="mdi mdi-facebook-box left"></i> Sign in</a>
                 <%= link_to "Sign in", "/users/sign_in", :class => "waves-effect waves-light btn-large right" %> 
             </div>
         </div>
