@@ -14,6 +14,19 @@ class Post
       field :posted_by, type:Array, default: []
       mount_uploader :image, PostUploader
       validates_uniqueness_of :url
+      validates_uniqueness_of :title
+
+      def self.dedupe
+        # find all models and group them on keys which should be common
+        grouped = all.group_by{|model| [model.title] }
+        grouped.values.each do |duplicates|
+          # the first one we want to keep right?
+          first_one = duplicates.shift # or pop for last one
+          # if there are any more left, they are duplicates
+          # so delete all of them
+          duplicates.each{|double| double.destroy} # duplicates can now be destroyed
+        end
+      end
 
       def self.collect_new_posts
         accounts = User.all.collect{|s| s.accounts}.flatten
