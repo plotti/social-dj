@@ -15,7 +15,7 @@
             <td><%= k %></td>
             <td><%= v.collect{|s| s.posted_by}.flatten.count %></td>
             <td><%= Post.where(:account => k).count %></td>
-            <td><%= '%.2f' % (Post.where(:account => k).count.to_f/v.collect{|s| s.posted_by}.flatten.count) %></td>
+            <td><%= '%.2f' % (v.collect{|s| s.posted_by}.flatten.count/Post.where(:account => k).count.to_f) %></td>
           </tr>
           <% end %>
         </tbody>
