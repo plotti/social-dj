@@ -16,6 +16,7 @@ gem "whenever"
 gem 'feedjira'
 gem "faraday_middleware"
 gem "devise"
+gem 'quiet_assets', group: :development
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'

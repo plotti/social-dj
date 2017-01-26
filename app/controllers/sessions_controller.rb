@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    #https://github.com/plataformatec/devise/wiki/OmniAuth:-Overview
   def create
     user = User.from_omniauth(env["omniauth.auth"])
     session[:user_id] = user.id

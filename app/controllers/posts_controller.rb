@@ -1,14 +1,12 @@
 class PostsController < ApplicationController    
-        protect_from_forgery except: :post_to_facebook
+    protect_from_forgery except: :post_to_facebook
 
     def login
         if params["signed_request"] != nil
-            puts "blubb"
             session[:user_id] = Koala::Facebook::OAuth.new('1056289671111906','e2adb04ef6ed37cbfaf7788f4e8f16f4').parse_signed_request(params["signed_request"])["user_id"]
             redirect_to url_for(:action => :index)
         end 
         if current_user != nil
-            puts "AHA"
             redirect_to url_for(:action => :index)
         end
     end
@@ -18,7 +16,7 @@ class PostsController < ApplicationController
             redirect_to("/signout")
             #redirect_to url_for(:action => :login)
         end
-        if current_user.accounts == [] || current_user.accounts == nil
+        if current_user.accounts == [] || @current_user.accounts == nil
             redirect_to url_for(:action => :set_up_accounts)
         # elsif current_user.ifttt_hook == nil
         #     redirect_to url_for(:action => :adjust_ifttt_hook)
@@ -50,7 +48,7 @@ class PostsController < ApplicationController
             redirect_to url_for(:action => :index)
         else
             if current_user.ifttt_hook == nil
-                @ifttt_hook = "https://maker.ifttt.com/trigger/post_to_facebook/with/key/YOUR_IFTTT_HOOK_KEY"
+                @ifttt_hook = "" #https://maker.ifttt.com/trigger/post_to_facebook/with/key/YOUR_IFTTT_HOOK_KEY"
             else
                 @ifttt_hook = current_user.ifttt_hook
             end

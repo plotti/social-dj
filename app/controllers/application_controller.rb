@@ -8,13 +8,15 @@ class ApplicationController < ActionController::Base
   def current_user
     begin
         if session[:user_id]
-            @current_user = User.find(session[:user_id]) 
+            @current_user ||= User.find(session[:user_id]) 
         else
-            @current_user = devise_current_user
+            @current_user ||= devise_current_user
         end
     rescue
         session[:user_id] = nil
     end
+    return @current_user
   end
-  helper_method :current_user_general
+
+  helper_method :current_user
 end
