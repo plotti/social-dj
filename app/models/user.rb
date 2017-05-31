@@ -54,9 +54,9 @@ class User
       user.password = auth.uid
       #user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       success = user.save
-      #puts "Creating user. Succeeded: #{success}"
+      puts "Creating user. Succeeded: #{success}"
     else
-      #puts "Found user #{user}"
+      puts "Found user #{user}"
     end
     return user
   end
