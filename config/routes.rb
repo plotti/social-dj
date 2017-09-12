@@ -5,11 +5,13 @@ Rails.application.routes.draw do
 
   # You can have the root of your site routed with "root"
   resources :posts
+  resources :accounts
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   match "post_to_facebook", to: "posts#post_to_facebook",via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
-  match "set_up_accounts", to: "posts#set_up_accounts",via: [:get, :post]#, format: :js
+  match "setup_account", to: "accounts#setup_account",via: [:get, :post]#, format: :js
+  match "custom_accounts", to: "accounts#custom_accounts",via: [:get, :post]#, format: :js
   match "adjust_ifttt_hook", to: "posts#adjust_ifttt_hook",via: [:get, :post]#, format: :js
   match "statistics", to: "posts#statistics", via: [:get, :post]
   match "feed/:uid", to: "posts#feed", via: [:get]

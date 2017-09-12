@@ -14,30 +14,11 @@ class PostsController < ApplicationController
     def index
         if current_user == nil
             redirect_to("/signout")
-            #redirect_to url_for(:action => :login)
         end
-        if current_user.accounts == [] || @current_user.accounts == nil
-            redirect_to url_for(:action => :set_up_accounts)
-        # elsif current_user.ifttt_hook == nil
-        #     redirect_to url_for(:action => :adjust_ifttt_hook)
+        if current_user.accounts == [] || current_user.accounts == nil
+            redirect_to :controller => 'accounts', :action => 'index' 
         else
-            @posts = Post.where(:account.in => current_user.accounts).order_by(:time => 'desc').page(params[:page]).per(10)
-        end
-    end
-
-    def set_up_accounts
-        if request.post?
-            accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","")}
-            #accounts = accounts.collect{|s| s.match(/www.facebook.com\/(.*)/)[1].gsub("/","") }
-            current_user.accounts = accounts
-            current_user.save
-            redirect_to url_for(:action => :index)
-        else
-            if current_user.accounts == [] || current_user.accounts == nil
-                @accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").values.flatten.join("\n")
-            else
-                @accounts = current_user.accounts.join("\n") #.collect{|s| "https://www.facebook.com/#{s}"}.join("\n")
-            end
+            @posts = Post.where(:account.in => current_user.accounts.collect{|s| s.link}).order_by(:time => 'desc').page(params[:page]).per(10)
         end
     end
 

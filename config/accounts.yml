@@ -1,70 +1,433 @@
-reddit:
-- https://www.reddit.com/r/woahdude.rss
-- https://www.reddit.com/r/ChildrenFallingOver.rss
-- https://www.reddit.com/r/Damnthatsinteresting.rss
-- https://www.reddit.com/r/instant_regret.rss
-- https://www.reddit.com/r/ANormalDayInRussia.rss
-- https://www.reddit.com/r/Cinemagraphs.rss
-- https://www.reddit.com/r/combinedgifs.rss
-- https://www.reddit.com/r/ContagiousLaughter.rss
-- https://www.reddit.com/r/dataisbeautiful.rss
-- https://www.reddit.com/r/EarthPorn.rss
-- https://www.reddit.com/r/FastWorkers.rss
-- https://www.reddit.com/r/gifsthatkeepongiving.rss
-- https://www.reddit.com/r/holdmybeaker.rss
-- https://www.reddit.com/r/ImaginaryLandscapes.rss
-- https://www.reddit.com/r/instant_regret.rss
-- https://www.reddit.com/r/mathgifs.rss
-- https://www.reddit.com/r/powerwashingporn.rss
-- https://www.reddit.com/r/reallifedoodles.rss
-- https://www.reddit.com/r/redneckengineering.rss
-- https://www.reddit.com/r/RoomPorn.rss
-- https://www.reddit.com/r/StreetArtPorn.rss
-- https://www.reddit.com/r/theocho.rss
-twitter:
-- https://twitter.com/graphittiblog
-- https://twitter.com/neomagazin
-- https://twitter.com/AustrianPrblms
-- https://twitter.com/OlisCartoons
-- https://twitter.com/Deppenapostroph
-instagram:
-- https://www.instagram.com/girlwithnojob/
-- https://www.instagram.com/betches/
-- https://www.instagram.com/fuckjerry/
-- https://www.instagram.com/funnywhenitswrong/
-- https://www.instagram.com/dasding/
-- https://www.instagram.com/celestebarber/
-facebook:
-- https://www.facebook.com/farbfiguren/
-- https://www.facebook.com/sketchingscience.atgc/
-- https://www.facebook.com/Get.IInspired/
-- https://www.facebook.com/operationlibero/
-- https://www.facebook.com/Quadrasophics/
-- https://www.facebook.com/dietwitterperlen/
-- https://www.facebook.com/classicalartmemes/
-- https://www.facebook.com/owlturdcomix/
-- https://www.facebook.com/Martin-Sonneborn-178442508884215/
-- https://www.facebook.com/OlisCartoons/
-- https://www.facebook.com/Faktillon/
-- https://www.facebook.com/ruthe.de/
-- https://www.facebook.com/NICHTLUSTIG/
-- https://www.facebook.com/smbccomics/
-- https://www.facebook.com/theoatmeal/
-- https://www.facebook.com/academicssay/
-- https://www.facebook.com/nebelspalter/
-- https://www.facebook.com/graphittiblog/
-- https://www.facebook.com/austrianproblems/
-- https://www.facebook.com/dakotztdastexterherz/
-- https://www.facebook.com/wrdprn/
-- https://www.facebook.com/Schlecky-Silberstein-113254378744731/
-- https://www.facebook.com/purpleclvr/
-- https://www.facebook.com/doitwithyallayalla/
-- https://www.facebook.com/perlendeslokaljournalismus/
-- https://www.facebook.com/explosm/
-- https://www.facebook.com/SarahKuttner/
-- https://www.facebook.com/DerPostillon/
-- https://www.facebook.com/Texte/
-- https://www.facebook.com/TitanicMagazin/
-- https://www.facebook.com/ThePatronoftheArts/
-- https://www.facebook.com/WarholianFan/
-- https://www.facebook.com/beratersprech/
+woahdude: 
+  name: Woahdude
+  platform: reddit
+  category: visuals
+  link: https://www.reddit.com/r/woahdude.rss
+  image: logos/woahdude.png
+  description: The best links to click while you're stoned!
+childrenfallingover:
+  name: Children falling over
+  platform: reddit
+  link: https://www.reddit.com/r/ChildrenFallingOver.rss
+  image: logos/childrenfallingover.png
+  category: funny
+  description: Children falling over in a funny harmless way.
+damnthatsinteresting:
+  name: Damn thats interesting
+  platform: reddit
+  link: https://www.reddit.com/r/Damnthatsinteresting.rss
+  image: logos/damnthatsinteresting.png
+  category: visuals
+  description: Things that are simply fascinating.
+instantregret:
+  name: Instant regret
+  platform: reddit
+  link: https://www.reddit.com/r/instant_regret.rss
+  image: logos/instantregret.png
+  category: funny
+  description: People regretting stupid decisions.
+anormaldayinrussia:
+  name: A normal day in russia
+  platform: reddit
+  link: https://www.reddit.com/r/ANormalDayInRussia.rss
+  image: logos/anormaldayinrussia.png
+  category: funny
+  description: Funny pictures from mother russia.
+Cinemagraphs:
+  name: Cinemagraphs
+  platform: reddit
+  link: https://www.reddit.com/r/Cinemagraphs.rss
+  image: logos/cinemagraphs.png
+  category: visuals
+  description: Gifs where only one part of the image is moving.
+combinedgifs:
+  name: Combined Gifs
+  platform: reddit
+  link: https://www.reddit.com/r/combinedgifs.rss
+  image: logos/combinedgifs.png
+  category: funny
+  description: Two gifs combined into a superb one.
+ContagiousLaughter:
+  name: Contaigious Loughter
+  platform: reddit
+  link: https://www.reddit.com/r/ContagiousLaughter.rss
+  image: logos/contaigiousloughter.png
+  category: funny
+  description: People making you smile.
+dataisbeautiful:
+  name: Data is beautifull.
+  platform: reddit
+  link: https://www.reddit.com/r/dataisbeautiful.rss
+  image: logos/dataisbeautifull.png
+  category: science
+  description: Great visualizations.
+EarthPorn:
+  name: Earth Porn
+  platform: reddit
+  link: https://www.reddit.com/r/EarthPorn.rss
+  image: logos/earthporn.png
+  category: visuals
+  description: Awsome pictures of mother earh.
+FastWorkers:
+  name: Fast Workers
+  platform: reddit
+  link: https://www.reddit.com/r/FastWorkers.rss
+  image: logos/fastworkers.png
+  category: funny
+  description: Gifs of people working super fast.
+gifsthatkeepongiving:
+  name: Gifs that keep on giving
+  platform: reddit
+  link: https://www.reddit.com/r/gifsthatkeepongiving.rss
+  image: logos/gifsthatkeepongiving.png
+  category: funny
+  description: Great longer than usual gifs.
+holdmybeaker:
+  name: Hold my Beaker
+  platform: reddit
+  link: https://www.reddit.com/r/holdmybeaker.rss
+  image: logos/holdmybeaker.png
+  category: science
+  description: Interesting images from science.
+ImaginaryLandscapes:
+  name: Imaginary Landscapes
+  platform: reddit
+  link: https://www.reddit.com/r/ImaginaryLandscapes.rss
+  image: logos/imaginarylandscapes.png
+  category: visuals
+  description: Drawn Imaginary Landscapes
+mathgifs:
+  name: Math gifs
+  platform: reddit
+  link: https://www.reddit.com/r/mathgifs.rss
+  image: logos/mathgifs.png
+  category: science
+  description: Gifs of cool math things.
+powerwashingporn:
+  name: Power washing porn
+  platform: reddit
+  link: https://www.reddit.com/r/powerwashingporn.rss
+  image: logos/powerwashingporn.png
+  category: visuals
+  description: Before and after using a powerwasher.
+reallifedoodles:
+  name: Reallife Doodles
+  platform: reddit
+  link: https://www.reddit.com/r/reallifedoodles.rss
+  image: logos/reallifedoodles.png
+  category: funny
+  description: Gifs with doodles drawn on them.
+redneckengineering:
+  name: Redneck Engineering
+  platform: reddit
+  link: https://www.reddit.com/r/redneckengineering.rss
+  image: logos/redneckengineering.png
+  category: funny
+  description: The greatest redneck hacks.
+RoomPorn:
+  name: Room Porn
+  platform: reddit
+  link: https://www.reddit.com/r/RoomPorn.rss
+  image: logos/roomporn.png
+  category: architecture
+  description: Collection of great indoor rooms.
+StreetArtPorn:
+  name: Street Art Porn
+  platform: reddit
+  link: https://www.reddit.com/r/StreetArtPorn.rss
+  image: logos/streetartporn.png
+  category: art
+  description: Collection of nice street art.
+theocho:
+  name: The Ocho
+  platform: reddit
+  link: https://www.reddit.com/r/theocho.rss
+  image: logos/theocho.png
+  category: sport
+  description: New sports that you have not seen yet.
+graphittiblog:
+  name: Graphitti Blog
+  platform: twitter
+  link: https://twitter.com/graphittiblog
+  image: logos/graphittiblog.png
+  category: funny
+  description: Funny charts about everyday things.
+neomagazin:
+  name: Neo Magazin
+  platform: twitter
+  link: https://twitter.com/neomagazin
+  image: logos/neomagazin.png
+  category: media
+  description: German parody magazine. 
+austrianproblems:
+  name: Austrian Problems
+  platform: twitter
+  link: https://twitter.com/AustrianPrblms
+  image: logos/austrianproblems.png
+  category: media
+  description: Exagerating articles of everyday life.
+OlisCartoons:
+  name: Olis Cartoons
+  platform: twitter
+  link: https://twitter.com/OlisCartoons
+  image: logos/oliscartoons.png 
+  category: comics
+  description: German funny cartoonist.
+Deppenapostroph:
+  name: Deppenappostroph
+  platform: twitter
+  link: https://twitter.com/Deppenapostroph
+  image: logos/deppenappaostroph.png
+  category: funny
+  description: Terrbile grammar in public signs. 
+girlwithnojob:
+  name: Girl with no job
+  platform: instagram
+  link: https://www.instagram.com/girlwithnojob/
+  image: logos/girlwithnojob.png
+  category: funny
+  description: Witty original stuff.
+betches:
+  name: Betches
+  platform: instagram
+  link: https://www.instagram.com/betches/
+  image: logos/betches.png
+  category: funny
+  description: Funny comics
+fuckjerry:
+  name: Fuck Jerry
+  platform: instagram
+  link: https://www.instagram.com/fuckjerry/
+  image: logos/fuckjerry.png
+  category: funny
+  description: Funny comics
+funnywhenitswrong:
+  name: Funny when its wrong
+  platform: instagram
+  link: https://www.instagram.com/funnywhenitswrong/
+  image: logos/funnywhenitswrong.png
+  category: funny
+  description: Funny commentary on everyday life
+dasding:
+  name: Dasding
+  platform: instagram
+  link: https://www.instagram.com/dasding/
+  image: logos/dasding.png
+  category: media
+  description: Fresh german funny radio
+celestebarber:
+  name: Celese Barber
+  platform: instagram
+  link: https://www.instagram.com/celestebarber/
+  image: logos/celestebarber.png
+  category: funny
+  description: Life imitating fashion.
+farbfiguren:
+  name: Farb figuren
+  platform: facebook
+  link: https://www.facebook.com/farbfiguren/
+  image: logos/farbfiguren.png
+  category: comics
+  description: Funny german comics
+sketchingscience:
+  name: Sketching Science
+  platform: facebook
+  link: https://www.facebook.com/sketchingscience.atgc/
+  image: logos/sketchingscience.png
+  category: funny
+  description: Commentary on a scientists life.
+getinspired:
+  name: Get inspired
+  platform: facebook
+  link: https://www.facebook.com/Get.IInspired/
+  image: logos/getinspired.png
+  category: lifehack
+  description: Small tricks for everyday life with kids. 
+operationlibero:
+  name: Operation Libero
+  platform: facebook
+  link: https://www.facebook.com/operationlibero/
+  image: logos/operationlibero.png
+  category: politics
+  description: Activist organisation from switzerland.
+Quadrasophics:
+  name: Quadrasophics
+  platform: facebook
+  link: https://www.facebook.com/Quadrasophics/
+  image: logos/quadrosophics.png
+  category: funny
+  description: Funny fake inspirational comments. 
+dietwitterperlen:
+  name: Die Twitterperlen
+  platform: facebook
+  link: https://www.facebook.com/dietwitterperlen/
+  image: logos/twitterperlen.png
+  category: funny
+  description: Best of twitter quotes.
+classicalartmemes:
+  name: Classical Art memes
+  platform: facebook
+  link: https://www.facebook.com/classicalartmemes/
+  image: logos/classicalartmemes.png
+  category: Funny
+  description: Memes made of classical art. 
+shencomics:
+  name: Owlturd comics
+  platform: facebook
+  link: https://www.facebook.com/shencomics/
+  image: logos/owlturd.png
+  category: comics
+  description: Comics on life.
+martinsonneborn:
+  name: Martin Sonneborn
+  platform: facebook
+  link: https://www.facebook.com/Martin-Sonneborn-178442508884215/ 
+  image: logos/martinsonneborn.png
+  category: politics
+  description: Parody on german politics.
+Faktillon:
+  name: Faktillon
+  platform: facebook
+  link: https://www.facebook.com/Faktillon/
+  image: logos/faktillion.png
+  category: funny
+  description: Fake funny facts.
+ruthe:
+  name: Ruthe
+  platform: facebook
+  link: https://www.facebook.com/ruthe.de/
+  image: logos/ruthe.png
+  category: comics
+  description: Funny german comics.
+nichtlustig:
+  name: Nicht Lustig
+  platform: facebook
+  link: https://www.facebook.com/NICHTLUSTIG/
+  image: logos/nichtlustig.png
+  category: comics
+  description: Funny german comic.
+smbccomics:
+  name: Saturday Morning Breakfast 
+  platform: facebook
+  link: https://www.facebook.com/smbccomics/
+  image: logos/smbccomics.png
+  category: comics
+  description: Philosophy cartoon.
+theoatmeal:
+  name: The oatmeal
+  platform: facebook
+  link: https://www.facebook.com/theoatmeal/
+  image: logos/theoatmeal.png
+  category: comics
+  description: Philosophy cartoon
+academicssay:
+  name: Academics say
+  platform: facebook
+  link: https://www.facebook.com/academicssay/
+  image: logos/academicssay.png
+  category: funny
+  description: Funny quotes from academia
+nebelspalter:
+  name: nebelspalter
+  platform: facebook
+  link: https://www.facebook.com/nebelspalter
+  image: logos/nebelspalter.png
+  category: magazine
+  description: German satire magazin
+dakotztdastexterherz:
+  name: Da kotzt das Texterherz
+  platform: facebook
+  link: https://www.facebook.com/dakotztdastexterherz
+  image: logos/dakotztdastexterherz.png
+  category: funny 
+  description: Funny german quotes.
+wrdprn:
+  name: Wordporn
+  platform: facebook
+  link: https://www.facebook.com/wrdprn/
+  image: logos/wordporn.png
+  category: funny
+  description: Funny german quotes
+schlecky:
+  name: Schlecky Silberstein
+  platform: facebook
+  link: https://www.facebook.com/Schlecky-Silberstein-113254378744731/
+  image: logos/schlecky.png
+  category: funny
+  description: German satire blog
+purpleclvr:
+  name: Purple Clover
+  platform: facebook
+  link: https://www.facebook.com/purpleclvr/
+  image: logos/purpleclover.png
+  category: funny
+  description: Funny women centric page.
+perlendeslokaljournalismus:
+  name: Perlen des Lokaljournalismus
+  platform: facebook
+  link: https://www.facebook.com/perlendeslokaljournalismus/
+  image: logos/perlendeslokaljournalismus.png 
+  category: Funy typos in german newspapers.
+  description:
+explosm:
+  name: Cyanide and Happiness
+  platform: facebook
+  link: https://www.facebook.com/explosm/
+  image: logos/explosm.png
+  category: comics
+  description: Zynist comic
+Sarakuttner:
+  name: Sarah Kuttner
+  platform: facebook
+  link: https://www.facebook.com/SarahKuttner/
+  image: logos/sarahkuttner.png
+  category: media
+  description: German public media figure.
+postillon:
+  name: Der Postillon
+  platform: facebook
+  link: https://www.facebook.com/DerPostillon/
+  image: logos/derpostillon.png
+  category: media
+  description: German satire on media.
+Text:
+  name: Schöne Texte 
+  platform: facebook
+  link: https://www.facebook.com/Texte/
+  image: logos/texte.png
+  category: funny
+  description: Funny german quotes
+TitanicMagazin:
+  name: Titanic Magazin
+  platform: facebook
+  link: https://www.facebook.com/TitanicMagazin
+  image: logos/titanic.png
+  category: media
+  description: German satire magazine
+ThePatronoftheArts:
+  name: Patron of the Arts
+  platform: facebook
+  link: https://www.facebook.com/ThePatronoftheArts
+  image: logos/patronofthearts.png
+  category: art
+  description: Collection of interesting art
+beratersprech:
+  name: Beratersprech
+  platform: facebook
+  link: https://www.facebook.com/beratersprech
+  image: logos/beratersprech.png
+  category: funny
+  description: Paradoy on consultant talk
+WarholianFan:
+  name: Warholian Fans
+  platform: facebook
+  link: https://www.facebook.com/WarholianFan
+  image: logos/warholian.png
+  category: art
+  description: Collection of interesting art
+WitzvomOlli:
+  name: Witz vom olli
+  platform: facebook
+  link: https://www.facebook.com/WitzvomOlli/
+  image: logos/witzvomolli.png
+  description: Guy telling jokes in his car.

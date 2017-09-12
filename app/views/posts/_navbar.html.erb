@@ -2,34 +2,49 @@
 <nav>
   <div class="nav-wrapper teal">
     <div class="navbar-header">
-      <%= link_to 'SocialDJ', "/", :class => "brand-logo" %>
+      <%= link_to "/", :class => "brand-logo" do %>
+          SocialDJ
+          <i class="large material-icons left">settings_input_component</i>
+      <% end %>
       <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
-        <li class="<%= cp(set_up_accounts_path) %>">
-            <%= link_to "Adjust my Accounts", set_up_accounts_path %>
+        <li class="<%= cp(accounts_path) %>">
+            <%= link_to(accounts_path) do %>
+            <i class="large material-icons left">settings</i>
+             My Accounts
+            <% end %>
         </li>
-        <li class="<%= cp(adjust_ifttt_hook_path) %>">
+<!--         <li class="<%= cp(adjust_ifttt_hook_path) %>">
             <%= link_to "Adjust my IFTTT Post hook", adjust_ifttt_hook_path %>
-        <li>
+        <li> -->
         <li class="<%= cp(statistics_path) %>">
-            <%= link_to "Statistics", statistics_path %>
+            <%= link_to statistics_path do %>
+            <i class="large material-icons left">insert_chart</i>
+            Statistics
+            <% end %>
         </li>
         <li>
             <% if current_user.provider == "facebook"%>
-                <%= link_to 'Logout', signout_path %>
+                <%= link_to  signout_path do %>
+                    Logout
+                    <i class="large material-icons left">power_settings_new</i>
+                <% end %>
             <% else %>
-                <%= link_to "Logout", destroy_user_session_path %>
+                <%= link_to destroy_user_session_path do %>
+                    Logout
+                    <i class="large material-icons left">power_settings_new</i>
+                <% end %>
             <% end %> 
         </li>
     </ul>
     <ul id="mobile-demo" class="side-nav">
         <li>
-            <%= link_to "Adjust my Accounts", set_up_accounts_path %>
+            <%= link_to "Adjust my Accounts", accounts_path %>
         </li>
-        <li>
+<!--         <li>
             <%= link_to "Adjust my IFTTT Post hook", adjust_ifttt_hook_path %>
         <li>
-        <li>
+ -->        <li>
             <%= link_to "Statistics", statistics_path %>
         </li>
         <li>

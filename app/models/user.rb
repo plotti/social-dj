@@ -38,8 +38,9 @@ class User
   field :name, type: String
   field :oauth_token, type: String
   field :oauth_expires_at, type: Time
-  field :accounts, type: Array
+  #field :accounts, type: Array, default: []
   field :ifttt_hook, type: String
+  has_many :accounts
 
   def self.from_omniauth(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first

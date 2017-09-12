@@ -1,0 +1,22 @@
+<% @accounts.each do |account| %>
+  <div class="col m4">
+    <div class="card small">
+        <div class="card-image">
+          <%= image_tag(image_path(account["image"])) %>
+          <a href="<%= account["link"].gsub(".rss","") %>" target="_blank">
+          <span class="card-title" style="text-shadow: 2px 2px #000000;"><%= account["name"] %></span>
+          </a>
+        </div>
+        <div class="card-content">
+          <p><%= account["description"] == "" ? account["link"] : account["description"] %></p>
+        </div>
+        <div class="card-action">
+            <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
+                <%= form.hidden_field :id %>
+                <%= form.check_box :selected %>
+                <%= form.label :selected %>
+            <% end %>
+        </div>
+    </div>
+  </div>
+<% end %>

@@ -1,0 +1,23 @@
+<h3>Select the accounts for your feed:</h3>
+<div class="row">
+  <%= render :partial => "account" %>
+</div>
+<div class="row">
+    <h3>Copy paste additional accounts you like:</h3>
+    <%= form_tag('/custom_accounts', remote: true, :authenticity_token => true, :class=>"col s12" ) do %>
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="accounts" placeholder="Just paste the links of the accounts e.g. https://www.facebook.com/smbccomics/ or https://twitter.com/Deppenapostroph or https://www.instagram.com/fuckjerry/ or https://www.reddit.com/r/woahdude"class="materialize-textarea" id="exampleTextarea"></textarea>
+                <input type="submit" class="btn waves-effect waves-light" style="width: 100%;" value="DONE" >
+            </div>
+        </div>
+    <% end %>
+</div>
+<script>
+// $('#exampleTextarea').each(function () {
+//   this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
+// }).on('input', function () {
+//   this.style.height = 'auto';
+//   this.style.height = (this.scrollHeight) + 'px';
+// });
+</script>
