@@ -16,6 +16,7 @@ class Post
       mount_uploader :image, PostUploader
       validates_uniqueness_of :url
       validates_uniqueness_of :title
+      index({ accout: -1 })
 
       def self.dedupe
         # find all models and group them on keys which should be common
