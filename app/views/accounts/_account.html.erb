@@ -11,9 +11,19 @@
           <p><%= account["description"] == "" ? account["link"] : account["description"] %></p>
         </div>
         <div class="card-action">
+        <% query = Post.where(:account => account.link).order_by(:time => "desc") %>
+        <% total_posts = query.count %>
+        <% if total_posts > 0 %>
+          <% days = query.first.time - query.last.time %>
+          <% frequency = '%.2f' % (total_posts/days) + " Posts per day" %>
+        <% else %>
+          <% frequency = "No Posts yet." %>
+        <% end %>
         <% if current_user.posts.where(:account => account.link).count > 0 %>
-          <p>Saved: <%= current_user.posts.where(:account => account.link).count %> |
-          Seen: <%= Post.where(:account => account.link).count %> | <%= '%.2f' % (current_user.posts.where(:account => account.link).count/Post.where(:account => account.link).count.to_f * 100 ) + " %" %></p>
+          <p>Saved: <%= current_user.posts.where(:account => account.link).count %> (<%= '%.0f' % (current_user.posts.where(:account => account.link).count/Post.where(:account => account.link).count.to_f * 100 ) + " %" %>) | <%= frequency %>
+          </p>
+        <% else %>
+          <p><%= frequency %></p>
         <% end %>
             <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
                 <%= form.hidden_field :id %>
