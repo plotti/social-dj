@@ -13,7 +13,6 @@
                         <% else %>
                             <img src="<%= post.image.url %>" />
                         <% end %>
-                    </div>
                     <span class="new badge" data-badge-caption="<%= post.account %>" style="    position: absolute;
     right:-20px;
     top:10px;
@@ -23,6 +22,8 @@
     padding:5px 10px;
     font-size:20px;
 "></span>
+                    </div>
+
                     <div class="card-content">
                         <input name="url" type="hidden" value='<%= post.url %>'/>
                         <input name="image" type="hidden" value='<%= post.image.url %>'/>
@@ -68,3 +69,12 @@
         </div>
     <% end %>
 <% end %>
+
+<script>
+$('.card-image').mouseover(function () {
+      $(this).find("span").hide();      
+});
+$('.card-image').mouseout(function () {
+      $(this).find("span").show();      
+});
+</script>
