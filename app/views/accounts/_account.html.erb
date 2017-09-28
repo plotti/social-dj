@@ -15,7 +15,7 @@
         <% total_posts = query.count %>
         <% if total_posts > 0 %>
           <% days = query.first.time - query.last.time %>
-          <% frequency = '%.2f' % (total_posts/days+1) + " Posts per day" %>
+          <% frequency = '%.2f' % (total_posts/days.to_i+1) + " Posts per day" %>
         <% else %>
           <% frequency = "No Posts yet." %>
         <% end %>
