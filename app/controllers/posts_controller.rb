@@ -22,6 +22,11 @@ class PostsController < ApplicationController
         end
     end
 
+    def saved
+        @posts = current_user.posts.order_by(:time => 'desc').page(params[:page]).per(10)
+        render :template => 'posts/index'
+    end
+
     def adjust_ifttt_hook
         if request.post?
             current_user.ifttt_hook = params["ifttt_hook"]
@@ -37,7 +42,17 @@ class PostsController < ApplicationController
     end 
 
     def statistics
-        @posts = Post.where(:posted_by => current_user.id).group_by(&:account)#.map{|key,val| {key => val.sum(&:posted_by)}}
+        @posts = current_user.posts.group_by(&:account)#.map{|key,val| {key => val.sum(&:posted_by)}}
+    end
+
+    def save
+        post = Post.find(params["id"])
+        current_user.posts << post
+        respond_to do |format|
+            format.js {   
+                flash[:notice] = "Saved to your collection."
+            }
+        end
     end
 
     def post_to_facebook

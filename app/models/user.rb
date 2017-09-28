@@ -41,6 +41,7 @@ class User
   #field :accounts, type: Array, default: []
   field :ifttt_hook, type: String
   has_many :accounts
+  has_many :posts
 
   def self.from_omniauth(auth)
     user = User.where(provider: auth.provider, uid: auth.uid).first

@@ -1,21 +1,34 @@
 <div class="row">
+  <h3>Statistic of the Accounts in your feed</h3>
     <div class="col s12 m12 l12">
         <table id="myTable">
          <thead>
           <tr>
+            <th></th>
             <th>Account</th>
-            <th>Number of Posts posted</th>
-            <th>Number of Posts in DB</th>
-            <th>Percentage of Posts posted</th>
+            <th>Posts saved</th>
+            <th>Posts seen</th>
+            <th>%</th>
+            <th>Subscribed</th>
           </tr>
         </thead>
         <tbody>
           <% @posts.each do |k,v| %>
+          <% account = current_user.accounts.select{|s| s.link == k}.first %>
+          <% next if account == nil %>
           <tr>
+            <td><%= image_tag(image_path(account["image"]), :class => "responsive-img large", :size => "80x80") %></td>
             <td><%= k %></td>
-            <td><%= v.collect{|s| s.posted_by}.flatten.count %></td>
+            <td><%= v.count %></td>
             <td><%= Post.where(:account => k).count %></td>
-            <td><%= '%.2f' % (v.collect{|s| s.posted_by}.flatten.count/Post.where(:account => k).count.to_f) %></td>
+            <td><%= '%.2f' % (v.count/Post.where(:account => k).count.to_f) %></td>
+            <td>
+            <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
+                <%= form.hidden_field :id %>
+                <%= form.check_box :selected %>
+                <%= form.label :selected %>
+            <% end %>
+            </td>
           </tr>
           <% end %>
         </tbody>
@@ -27,3 +40,6 @@ $(document).ready(function(){
     $('#myTable').DataTable({paging: false, searching: false});
 });
 </script>
+<div class="row">
+  <%= link_to "Add more accounts to your feed", "/accounts#index",  {:class => "waves-effect waves-light btn-large", :style=>"width: 100%;"} %> 
+</div>

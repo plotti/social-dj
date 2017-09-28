@@ -4,12 +4,16 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  resources :posts
-  resources :accounts
+  resources :posts do 
+    get 'saved', on: :collection
+  end
+  resources :accounts 
+
   match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
   match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   match "post_to_facebook", to: "posts#post_to_facebook",via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
+  match "save", to: "posts#save" ,via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
   match "setup_account", to: "accounts#setup_account",via: [:get, :post]#, format: :js
   match "custom_accounts", to: "accounts#custom_accounts",via: [:get, :post]#, format: :js
   match "adjust_ifttt_hook", to: "posts#adjust_ifttt_hook",via: [:get, :post]#, format: :js

@@ -11,6 +11,8 @@ class Post
       field :movie_poster, type: String
       field :image_url, type: String, default: ""
       field :posted_by, type:Array, default: []
+      belongs_to :user
+
       mount_uploader :image, PostUploader
       validates_uniqueness_of :url
       validates_uniqueness_of :title
@@ -28,10 +30,10 @@ class Post
       end
 
       def self.collect_new_posts
-        accounts = User.all.collect{|s| s.accounts}.flatten
-        accounts.each do |account|
-            results = Post.get_new_posts(account)
-            logger.info("Collected #{results.count} new items for #{account}. #{Post.count}")
+        links = User.all.collect{|s| s.accounts.collect{|a| a.link}}.flatten.uniq
+        links.each do |link|
+            results = Post.get_new_posts(link)
+            logger.info("Collected #{results.count} new items for #{link}. #{Post.count}")
         end
       end
   

@@ -11,6 +11,10 @@
           <p><%= account["description"] == "" ? account["link"] : account["description"] %></p>
         </div>
         <div class="card-action">
+        <% if current_user.posts.where(:account => account.link).count > 0 %>
+          <p>Saved: <%= current_user.posts.where(:account => account.link).count %> |
+          Seen: <%= Post.where(:account => account.link).count %> | <%= '%.2f' % (current_user.posts.where(:account => account.link).count/Post.where(:account => account.link).count.to_f * 100 ) + " %" %></p>
+        <% end %>
             <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
                 <%= form.hidden_field :id %>
                 <%= form.check_box :selected %>

@@ -1,5 +1,5 @@
 <% @posts.each do |post| %>
-    <%= form_tag('/post_to_facebook', remote: true, :authenticity_token => true ) do %>
+    <%= form_tag('/save', remote: true, :authenticity_token => true ) do %>
         <div class="row">
             <div class="col s12 m12 l6 offset-l3">
                 <div class="card">
@@ -14,6 +14,15 @@
                             <img src="<%= post.image.url %>" />
                         <% end %>
                     </div>
+                    <span class="new badge" data-badge-caption="<%= post.account %>" style="    position: absolute;
+    right:-20px;
+    top:10px;
+    text-align: center;
+    border-radius: 30px 30px 30px 30px;
+    color:white;
+    padding:5px 10px;
+    font-size:20px;
+"></span>
                     <div class="card-content">
                         <input name="url" type="hidden" value='<%= post.url %>'/>
                         <input name="image" type="hidden" value='<%= post.image.url %>'/>
@@ -32,9 +41,10 @@
                     </div>
                     <% end %>
                     <div class="card-action">
-                        <% if !post.image.url.include?("mp4") && current_user.ifttt_hook != nil %>
-                            <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to FB-page" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" >
-                        <% end %>
+                            <!-- <input type="submit" class="btn waves-effect waves-light btn-large" value="Post to FB-page" onclick="Materialize.toast('Posted Post to your facebook page!', 3000)" > -->
+                            <% if !cp(saved_posts_path) %>
+                            <input type="submit" class="btn waves-effect waves-light btn-large" value="Save" onclick="Materialize.toast('Saved Post to your collection!', 3000)" >
+                            <% end %>
                             <div class="fixed-action-btn vertical" style="position: absolute; display: inline-block; right: 19px;">
                               <a class="btn-floating btn-large mdi mdi-share-variant">
                                 <i class="mdi-social-notifications-none"></i>

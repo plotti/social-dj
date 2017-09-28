@@ -14,15 +14,21 @@
              My Accounts
             <% end %>
         </li>
+        <li class="<%= cp(saved_posts_path) %>">
+            <%= link_to(saved_posts_path) do %>
+            <i class="large material-icons left">archive</i>
+             My saved posts
+            <% end %>
+        </li>
 <!--         <li class="<%= cp(adjust_ifttt_hook_path) %>">
             <%= link_to "Adjust my IFTTT Post hook", adjust_ifttt_hook_path %>
         <li> -->
-        <li class="<%= cp(statistics_path) %>">
+<!--         <li class="<%= cp(statistics_path) %>">
             <%= link_to statistics_path do %>
             <i class="large material-icons left">insert_chart</i>
             Statistics
             <% end %>
-        </li>
+        </li> -->
         <li>
             <% if current_user.provider == "facebook"%>
                 <%= link_to  signout_path do %>

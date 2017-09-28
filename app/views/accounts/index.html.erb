@@ -1,5 +1,15 @@
 <h3>Select the accounts for your feed:</h3>
 <div class="row">
+    <div class="col s12 m6 l6">
+        <input type="submit" id="select-all" class="btn waves-effect waves-light" style="width: 100%;" value="Select all" >
+        <br/>
+        <br/>
+    </div>
+    <div class="col s12 m6 l6">
+        <input type="submit" id="select-none" class="btn waves-effect waves-light" style="width: 100%;" value="Select none" >
+    </div>
+</div>
+<div class="row">
   <%= render :partial => "account" %>
 </div>
 <div class="row">
@@ -14,6 +24,20 @@
     <% end %>
 </div>
 <script>
+$('#select-all').click(function(event) {   
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = "checked";                        
+        });
+        $("html, body").animate({ scrollTop: $(document).height() }, 1000);
+});
+$('#select-none').click(function(event) {   
+        // Iterate each checkbox
+        $(':checkbox').each(function() {
+            this.checked = null;                        
+        });
+});
+
 // $('#exampleTextarea').each(function () {
 //   this.setAttribute('style', 'height:' + (this.scrollHeight) + 'px;overflow-y:hidden;');
 // }).on('input', function () {
