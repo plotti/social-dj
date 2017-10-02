@@ -18,6 +18,8 @@
         <div class="card-content">
           <p><%= account["description"] == "" ? account["link"] : account["description"] %>
                   <% query = Post.where(:account => account.link).order_by(:time => "desc") %>
+          </p>
+
         <% total_posts = query.count %>
         <% if total_posts > 0 %>
           <% days = query.first.time - query.last.time %>
@@ -36,7 +38,7 @@
             <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
                 <%= form.hidden_field :id %>
                 <%= form.check_box :selected %>
-                <%= form.label :selected %>
+                <%= form.label :selected, 'Select' %>
             <% end %>
         </div>
     </div>
