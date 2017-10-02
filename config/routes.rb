@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  devise_for :users
+  #devise_for :users
+  devise_for :users, controllers: {
+    sessions: 'users/sessions'
+  }
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -7,10 +10,11 @@ Rails.application.routes.draw do
   resources :posts do 
     get 'saved', on: :collection
   end
-  resources :accounts 
 
-  match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
-  match 'auth/failure', to: redirect('/'), via: [:get, :post]
+
+  resources :accounts 
+  # match 'auth/:provider/callback', to: 'sessions#create', via: [:get, :post]
+  # match 'auth/failure', to: redirect('/'), via: [:get, :post]
   match 'signout', to: 'sessions#destroy', as: 'signout', via: [:get, :post]
   match "post_to_facebook", to: "posts#post_to_facebook",via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
   match "save", to: "posts#save" ,via: [:get, :post], :defaults => { :format => 'js' }#, format: :js
