@@ -1,17 +1,23 @@
 <% @accounts.each do |account| %>
   <div class="col m4">
-    <div class="card small">
+    <div class="card medium hoverable">
         <div class="card-image">
           <%= image_tag(image_path(account["image"])) %>
           <a href="<%= account["link"].gsub(".rss","") %>" target="_blank">
           <span class="card-title" style="text-shadow: 2px 2px #000000;"><%= account["name"] %></span>
           </a>
+          <span class="new badge" data-badge-caption="<%= account["platform"] %>" style="    position: absolute;
+                            right:10px;
+                            top:10px;
+                            text-align: center;
+                            border-radius: 10px 10px 10px 10px;
+                            color:white;
+                            padding:5px 10px;
+                            font-size:15px;"></span>
         </div>
         <div class="card-content">
-          <p><%= account["description"] == "" ? account["link"] : account["description"] %></p>
-        </div>
-        <div class="card-action">
-        <% query = Post.where(:account => account.link).order_by(:time => "desc") %>
+          <p><%= account["description"] == "" ? account["link"] : account["description"] %>
+                  <% query = Post.where(:account => account.link).order_by(:time => "desc") %>
         <% total_posts = query.count %>
         <% if total_posts > 0 %>
           <% days = query.first.time - query.last.time %>
@@ -20,11 +26,13 @@
           <% frequency = "No Posts yet." %>
         <% end %>
         <% if current_user.posts.where(:account => account.link).count > 0 %>
-          <p>Saved: <%= current_user.posts.where(:account => account.link).count %> (<%= '%.0f' % (current_user.posts.where(:account => account.link).count/Post.where(:account => account.link).count.to_f * 100 ) + " %" %>) | <%= frequency %>
-          </p>
+          Saved: <%= current_user.posts.where(:account => account.link).count %> (<%= '%.0f' % (current_user.posts.where(:account => account.link).count/Post.where(:account => account.link).count.to_f * 100 ) + " %" %>) | <%= frequency %>
         <% else %>
-          <p><%= frequency %></p>
+          <%= frequency %>
         <% end %>
+        </p>
+        </div>
+        <div class="card-action">
             <%= form_for account, id: account.id, namespace: account.id, url: "accounts/setup_account", remote: true, :authenticity_token => true do |form| %>
                 <%= form.hidden_field :id %>
                 <%= form.check_box :selected %>
