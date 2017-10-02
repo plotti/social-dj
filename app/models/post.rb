@@ -36,6 +36,7 @@ class Post
             results = Post.get_new_posts(link)
             logger.info("Collected #{results.count} new items for #{link}. #{Post.count}")
         end
+        Post.lte(:time => Date.today - 1.month).where(:user_id => nil).delete_all
       end
   
       def self.get_new_posts(account_url)
