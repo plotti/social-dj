@@ -54,8 +54,10 @@ class Post
       end
 
       def self.get_new_reddit_posts(account_url="https://www.reddit.com/r/woahdude.rss")
+        results = []
         begin
           feed = Feedjira::Feed.fetch_and_parse account_url
+          results = feed.entries
           feed.entries.each do |entry|
               url = entry.url
               post = Post.where(:url => url).first
