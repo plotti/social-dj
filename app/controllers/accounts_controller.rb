@@ -12,7 +12,7 @@ class AccountsController < ApplicationController
 	end
 
 	def custom_accounts
-	    accounts =  params["accounts"].split("\r").collect{|s| s.gsub("\n","")}
+		accounts = URI.extract(params["accounts"])
 	    accounts.each do |account|
 	    	name = account.split("/").last
 	    	platform = account.gsub("//","").split("/").first.gsub("www","").gsub(".com","")

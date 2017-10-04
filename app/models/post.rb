@@ -54,101 +54,117 @@ class Post
       end
 
       def self.get_new_reddit_posts(account_url="https://www.reddit.com/r/woahdude.rss")
-        feed = Feedjira::Feed.fetch_and_parse account_url
-        feed.entries.each do |entry|
-            url = entry.url
-            post = Post.where(:url => url).first
-            if post == nil
-                logger.info("Collecting #{url} for #{account_url}")
-                p = Post.new
-                begin
-                    image_url = Nokogiri::HTML(entry.content).at('a:contains("link")')["href"].gsub(".gifv",".mp4")
-                    p.remote_image_url = image_url#,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
-                rescue
-                    logger.error("Something went wrong with #{image_url}")
-                end
-                p.title = entry.title
-                p.description = ""
-                p.account = account_url
-                p.url = url
-                p.time = entry.updated.to_datetime
-                if p.remote_image_url != nil
-                    begin
-                        p.save!
-                        logger.info("Saved post with #{url}")
-                    rescue
-                        logger.info("Turns out that post already exists?! #{url}")
-                    end
-                else
-                    logger.info("Skipped post #{url} because it did't have images.")
-                end
-            else
-                logger.info("Post with #{url} already exists.")
-                p = post
-            end
+        begin
+          feed = Feedjira::Feed.fetch_and_parse account_url
+          feed.entries.each do |entry|
+              url = entry.url
+              post = Post.where(:url => url).first
+              if post == nil
+                  logger.info("Collecting #{url} for #{account_url}")
+                  p = Post.new
+                  begin
+                      image_url = Nokogiri::HTML(entry.content).at('a:contains("link")')["href"].gsub(".gifv",".mp4")
+                      p.remote_image_url = image_url#,{ssl_verify_mode: OpenSSL::SSL::VERIFY_NONE})
+                  rescue
+                      logger.error("Something went wrong with #{image_url}")
+                  end
+                  p.title = entry.title
+                  p.description = ""
+                  p.account = account_url
+                  p.url = url
+                  p.time = entry.updated.to_datetime
+                  if p.remote_image_url != nil
+                      begin
+                          p.save!
+                          logger.info("Saved post with #{url}")
+                      rescue
+                          logger.info("Turns out that post already exists?! #{url}")
+                      end
+                  else
+                      logger.info("Skipped post #{url} because it did't have images.")
+                  end
+              else
+                  logger.info("Post with #{url} already exists.")
+                  p = post
+              end
+          end
+        rescue
+          logger.error("Error with #{account_url}")
         end
       end
 
       def self.get_new_twitter_posts(account_url)
-        account = account_url.match(/twitter.com\/(.*)/)[1].gsub("/","")
-        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Twitter&u=#{account}&format=Html"
-        result = HTTParty.get(url)
-        doc = Nokogiri::HTML(result.body)
-        results = []
-        doc.css(".feeditem").each do |item|
-            p = Post.create_post(item,account_url)
-            next if p == nil
-            results << p
+        begin
+          account = account_url.match(/twitter.com\/(.*)/)[1].gsub("/","")
+          url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Twitter&u=#{account}&format=Html"
+          result = HTTParty.get(url)
+          doc = Nokogiri::HTML(result.body)
+          results = []
+          doc.css(".feeditem").each do |item|
+              p = Post.create_post(item,account_url)
+              next if p == nil
+              results << p
+          end
+          return results
+        rescue
+          logger.error("Error with #{account_url}")
         end
-        return results
       end
 
       def self.get_new_instagram_posts(account_url)
-        account = account_url.match(/instagram.com\/(.*)/)[1].gsub("/","")
-        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Instagram&u=#{account}&format=Html"
-        result = HTTParty.get(url)
-        doc = Nokogiri::HTML(result.body)
-        results = []
-        doc.css(".feeditem").each do |item|
-            p = Post.create_post(item,account_url,{:image_selector => "img", :text_selector => "h2"})
-            next if p == nil
-            results << p
+        begin
+          account = account_url.match(/instagram.com\/(.*)/)[1].gsub("/","")
+          url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Instagram&u=#{account}&format=Html"
+          result = HTTParty.get(url)
+          doc = Nokogiri::HTML(result.body)
+          results = []
+          doc.css(".feeditem").each do |item|
+              p = Post.create_post(item,account_url,{:image_selector => "img", :text_selector => "h2"})
+              next if p == nil
+              results << p
+          end
+        rescue
+          logger.error("Error with #{account_url}")
         end
         return results
       end
 
 
       def self.get_new_fb_posts(account_url)
-        account = account_url.match(/www.facebook.com\/(.*)/)[1].gsub("/","")
-        url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
-        result = HTTParty.get(url)
-        path = Rails.root
-        results = []
-        no_capcha_needed = true
-        if result.body.include?("Facebook captcha challenge")
-            no_capcha_needed = false
-            logger.error("Capcha: Error collecting new items for #{url}.")
-            logger.info("Trying to solve it.")
-            command = "php -f #{path}/fb-captcha-solver.php '#{url}' 10"
-            logger.info(command)
-            result = `#{command}`
-            logger.info(result)
-            if result.include?("Successfully")
-                no_capcha_needed = true
-            end
-        end
-        if no_capcha_needed
-            result = HTTParty.get(url)
-            doc = Nokogiri::HTML(result.body)
-            results = []
-            doc.css(".feeditem").each do |item|
-                p = Post.create_post(item,account_url)
-                next if p == nil
-                results << p
-            end
-            return results
-        else
-            logger.info("Could not solve capcha.")
+        begin
+          account = account_url.match(/www.facebook.com\/(.*)/)[1].gsub("/","")
+          url = "http://rss-bridge.crossplatformanalytics.ch/?action=display&bridge=Facebook&u=#{account}&format=Html"
+          result = HTTParty.get(url)
+          path = Rails.root
+          results = []
+          no_capcha_needed = true
+          if result.body.include?("Facebook captcha challenge")
+              no_capcha_needed = false
+              logger.error("Capcha: Error collecting new items for #{url}.")
+              logger.info("Trying to solve it.")
+              command = "php -f #{path}/fb-captcha-solver.php '#{url}' 10"
+              logger.info(command)
+              result = `#{command}`
+              logger.info(result)
+              if result.include?("Successfully")
+                  no_capcha_needed = true
+              end
+          end
+          if no_capcha_needed
+              result = HTTParty.get(url)
+              doc = Nokogiri::HTML(result.body)
+              results = []
+              doc.css(".feeditem").each do |item|
+                  p = Post.create_post(item,account_url)
+                  next if p == nil
+                  results << p
+              end
+              return results
+          else
+              logger.info("Could not solve capcha.")
+          end
+        rescue
+          logger.error("Error with #{account_url}")
         end
         return results
       end
