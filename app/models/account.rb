@@ -13,7 +13,7 @@ class Account
       field :image, type: String, default: "logos/placeholder.jpg"
       field :description, type:String, default: ""
       field :selected, type:Boolean, default: false
-      field :private, default: false
+      field :private, default: true
 
       def self.read_in_accounts()
       	accounts = YAML.load_file("#{Rails.root}/config/accounts.yml").values.flatten

@@ -89,8 +89,10 @@ class Post
               end
           end
         rescue
+          results = []
           logger.error("Error with #{account_url}")
         end
+        return results
       end
 
       def self.get_new_twitter_posts(account_url)
@@ -105,10 +107,11 @@ class Post
               next if p == nil
               results << p
           end
-          return results
         rescue
+          results = []
           logger.error("Error with #{account_url}")
         end
+        return results        
       end
 
       def self.get_new_instagram_posts(account_url)
@@ -124,6 +127,7 @@ class Post
               results << p
           end
         rescue
+          results = []
           logger.error("Error with #{account_url}")
         end
         return results
@@ -164,6 +168,7 @@ class Post
               logger.info("Could not solve capcha.")
           end
         rescue
+          results = []
           logger.error("Error with #{account_url}")
         end
         return results
